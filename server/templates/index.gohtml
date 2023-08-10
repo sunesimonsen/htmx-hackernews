@@ -1,3 +1,6 @@
 {{template "start" .}}
 <h1>Index</h1>
+<div hx-get="/story/42" hx-trigger="load">
+  <img  alt="Result loading..." class="htmx-indicator" src="/assets/loader.gif"/>
+</div>
 {{template "end" .}}
