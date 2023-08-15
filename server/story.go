@@ -17,6 +17,7 @@ func (s *server) Story() Handle {
 		Url         string `json:"url"`
 		Descendants int    `json:"descendants"`
 		Type        string `json:"type"`
+		Time        int    `json:"time"`
 		Score       int    `json:"score"`
 		Kids        []int  `json:"kids"`
 	}
