@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
@@ -23,14 +22,14 @@ func (s *server) Story() Handle {
 	}
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) error {
-		url := "https://hacker-news.firebaseio.com/v0/item/37046770.json"
+		url := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%s.json", ps.ByName("id"))
 
 		storyResponse, err := http.Get(url)
 		if err != nil {
 			return err
 		}
 
-		storyData, err := ioutil.ReadAll(storyResponse.Body)
+		storyData, err := io.ReadAll(storyResponse.Body)
 		if err != nil && err != io.EOF {
 			return err
 		}
