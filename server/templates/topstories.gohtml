@@ -1,0 +1,5 @@
+{{range $id := .}}
+<div hx-get="/story/{{$id}}" hx-trigger="revealed">
+  <img height="30" alt="Result loading..." class="htmx-indicator" src="/assets/loader.gif"/>
+</div>
+{{end}}

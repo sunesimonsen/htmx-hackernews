@@ -1,9 +1,6 @@
 {{template "start" .}}
 <h1>Index</h1>
-<div hx-get="/story/42" hx-trigger="load">
-  <img  alt="Result loading..." class="htmx-indicator" src="/assets/loader.gif"/>
-</div>
-<div hx-get="/story/32" hx-trigger="load">
-  <img  alt="Result loading..." class="htmx-indicator" src="/assets/loader.gif"/>
+<div hx-get="/topstories" hx-trigger="load">
+  <img height="30" alt="Result loading..." class="htmx-indicator" src="/assets/loader.gif"/>
 </div>
 {{template "end" .}}
