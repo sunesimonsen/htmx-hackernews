@@ -15,3 +15,13 @@ htmx.onLoad(function (content) {
     );
   }
 });
+
+const startAnimation = (element, animationClass) => {
+  const stopAnimation = () => {
+    element.classList.remove(animationClass);
+    element.removeEventListener("animationend", stopAnimation);
+  };
+
+  element.addEventListener("animationend", stopAnimation);
+  element.classList.add(animationClass);
+};

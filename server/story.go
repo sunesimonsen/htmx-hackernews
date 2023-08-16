@@ -10,7 +10,7 @@ import (
 )
 
 func (s *server) Story() Handle {
-	type Item struct {
+	type Story struct {
 		Id          int    `json:"id"`
 		By          string `json:"by"`
 		Title       string `json:"title"`
@@ -20,6 +20,11 @@ func (s *server) Story() Handle {
 		Time        int    `json:"time"`
 		Score       int    `json:"score"`
 		Kids        []int  `json:"kids"`
+	}
+
+	type Data struct {
+		Story         Story
+		IncludeLayout bool
 	}
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) error {
@@ -35,7 +40,7 @@ func (s *server) Story() Handle {
 			return err
 		}
 
-		story := Item{}
+		story := Story{}
 		err = json.Unmarshal(storyData, &story)
 		if err != nil {
 			fmt.Println(err.Error())
@@ -45,7 +50,10 @@ func (s *server) Story() Handle {
 		return s.templates.ExecuteTemplate(
 			w,
 			"story.gohtml",
-			story,
+			Data{
+				Story:         story,
+				IncludeLayout: r.Header["Hx-Request"] == nil,
+			},
 		)
 	}
 }

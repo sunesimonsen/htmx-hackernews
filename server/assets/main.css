@@ -1,0 +1,138 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Verdana, Geneva, sans-serif;
+  background: #ecece3;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  background: rgb(255, 102, 0);
+  color: white;
+  height: 38px;
+  position: sticky;
+  top: 0px;
+  z-index: 1;
+}
+
+.content {
+  padding: 20px 0;
+  width: 90vw;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.story {
+  position: relative;
+  line-height: 24px;
+  list-style-type: none;
+  background: white;
+  padding: 20px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.story > .title {
+  display: block;
+  font-weight: normal;
+  margin-top: 0;
+  font-size: 1.5em;
+  line-height: 1.5em;
+  color: black;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.story > footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  color: grey;
+}
+
+.stories {
+  box-sizing: border-box;
+  display: grid;
+  grid-gap: 8px;
+  padding: 0;
+  margin: 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  padding: 8px 20px;
+}
+
+.logo:hover {
+  background: rgb(222 90 2);
+}
+
+.logo:active {
+  background: rgb(195 78 0);
+}
+
+.logo > img {
+  border: thin solid white;
+  width: 20px;
+  height: 20px;
+}
+
+.logo > .logo-caption {
+  margin: 0 10px;
+}
+
+.reload {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  color: white;
+  border: none;
+  height: 36px;
+  width: 36px;
+  cursor: pointer;
+  outline: none;
+  padding: 10px;
+}
+
+.reload:hover {
+  background: rgb(222 90 2);
+}
+
+.reload:active {
+  background: rgb(195 78 0);
+}
+
+@keyframes spin-animation {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.reload.spin-animation > svg {
+  animation: spin-animation 1s linear 1;
+}
+
+.skeleton {
+  display: inline-block;
+  position: relative;
+  border-radius: 4px;
+  width: 100%;
+  height: 0.9em;
+  margin-top: 0.3em;
+  margin-bottom: 0.3em;
+  overflow: hidden;
+  background-color: rgba(47, 57, 65, 0.1);
+}

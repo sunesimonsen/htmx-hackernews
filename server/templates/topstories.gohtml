@@ -1,5 +1,6 @@
-{{range $id := .}}
-<div hx-get="/story/{{$id}}" hx-trigger="revealed">
-  <img height="30" alt="Result loading..." class="htmx-indicator" src="/assets/loader.gif"/>
-</div>
+{{range $id := .Ids}}
+    <article class="story" hx-get="/story/{{$id}}" hx-trigger="revealed" hx-swap="outerHTML">
+        <a class="title">{{template "skeleton" .}}</a>
+        <footer>{{template "skeleton" .}}</footer>
+    </article>
 {{end}}

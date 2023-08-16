@@ -2,6 +2,7 @@ package server
 
 import (
 	"embed"
+	"math/rand"
 	"net/http"
 	"text/template"
 
@@ -23,7 +24,13 @@ func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func NewServer() (*server, error) {
-	templates, err := template.ParseFS(templatesFS, "templates/*.gohtml")
+
+	templates, err := template.New("templates").Funcs(template.FuncMap{
+		"randomInt": func(min int, max int) int {
+			return rand.Intn(max-min+1) + min
+		},
+	}).ParseFS(templatesFS, "templates/*.gohtml")
+
 	if err != nil {
 		return nil, err
 	}

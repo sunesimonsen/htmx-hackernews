@@ -1,6 +1,9 @@
 {{template "start" .}}
-<h1>Index</h1>
-<div hx-get="/topstories" hx-trigger="load">
-  <img height="30" alt="Result loading..." class="htmx-indicator" src="/assets/loader.gif"/>
+<div class="stories" hx-get="/topstories" hx-trigger="load">
+  {{template "story-placeholder" .}}
+  {{template "story-placeholder" .}}
+  {{template "story-placeholder" .}}
+  {{template "story-placeholder" .}}
+  {{template "story-placeholder" .}}
 </div>
 {{template "end" .}}

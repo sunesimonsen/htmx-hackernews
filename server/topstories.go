@@ -10,6 +10,10 @@ import (
 )
 
 func (s *server) TopStories() Handle {
+	type Data struct {
+		Ids []int
+	}
+
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) error {
 		url := "https://hacker-news.firebaseio.com/v0/topstories.json"
 
@@ -33,7 +37,9 @@ func (s *server) TopStories() Handle {
 		return s.templates.ExecuteTemplate(
 			w,
 			"topstories.gohtml",
-			ids,
+			Data{
+				Ids: ids,
+			},
 		)
 	}
 }
