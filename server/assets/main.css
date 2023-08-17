@@ -51,7 +51,28 @@ header {
   margin-bottom: 8px;
 }
 
-.story > footer {
+.comment {
+  font-size: smaller;
+}
+
+.comments > .comment {
+  border-top: thin solid #ccc;
+  margin-top: 1em;
+  padding-top: 1em;
+}
+
+.comment.expanded {
+  background: white;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.comment > footer {
+  margin-top: 0.5em;
+}
+
+.story > footer,
+.comment > footer {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;

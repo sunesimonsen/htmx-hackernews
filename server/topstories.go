@@ -34,12 +34,8 @@ func (s *server) TopStories() Handle {
 			return err
 		}
 
-		return s.templates.ExecuteTemplate(
-			w,
-			"topstories.gohtml",
-			Data{
-				Ids: ids,
-			},
-		)
+		return s.renderTemplate(w, "topstories.gohtml", Data{
+			Ids: ids,
+		})
 	}
 }

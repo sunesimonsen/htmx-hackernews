@@ -1,5 +1,5 @@
 {{range $id := .Ids}}
-    <article class="story" hx-get="/story/{{$id}}" hx-trigger="revealed" hx-swap="outerHTML">
+    <article class="story" hx-get="/story/{{$id}}?embed" hx-trigger="revealed" hx-swap="outerHTML">
         <a class="title">{{template "skeleton" .}}</a>
         <footer>{{template "skeleton" .}}</footer>
     </article>

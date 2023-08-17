@@ -1,5 +1,5 @@
 {{template "start" .}}
-<div class="stories" hx-get="/topstories" hx-trigger="load">
+<div class="stories" hx-get="/topstories?embed" hx-trigger="load">
   {{template "story-placeholder" .}}
   {{template "story-placeholder" .}}
   {{template "story-placeholder" .}}

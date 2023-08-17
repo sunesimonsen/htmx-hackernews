@@ -1,0 +1,12 @@
+{{if .IncludeLayout}}{{template "start"}}{{end}}
+<article class="comment{{if .IncludeLayout}} expanded{{end}}">
+    {{.Comment.Text}}
+    <footer>
+        <span>{{.Comment.By}}</span>
+        <span data-timestamp>{{.Comment.Time}}</span>
+        {{if not .IncludeLayout}}
+        <span>{{.Comment.Answers}} answers</span>
+        {{end}}
+    </footer>
+</article>
+{{if .IncludeLayout}}{{template "end"}}{{end}}

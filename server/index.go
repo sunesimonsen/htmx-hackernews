@@ -8,6 +8,6 @@ import (
 
 func (s *server) Index() Handle {
 	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) error {
-		return s.templates.ExecuteTemplate(w, "index.gohtml", nil)
+		return s.renderTemplate(w, "index.gohtml", nil)
 	}
 }

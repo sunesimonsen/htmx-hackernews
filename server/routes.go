@@ -6,5 +6,6 @@ func (s *server) setupRoutes() {
 	s.router.GET("/", WithErrorHandling(s.Index()))
 	s.router.GET("/topstories", WithErrorHandling(s.TopStories()))
 	s.router.GET("/story/:id", WithErrorHandling(s.Story()))
+	s.router.GET("/comment/:id", WithErrorHandling(s.Comment()))
 	s.router.ServeFiles("/assets/*filepath", http.Dir("server/assets"))
 }

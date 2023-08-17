@@ -16,7 +16,6 @@ func (s *server) Story() Handle {
 		Title       string `json:"title"`
 		Url         string `json:"url"`
 		Descendants int    `json:"descendants"`
-		Type        string `json:"type"`
 		Time        int    `json:"time"`
 		Score       int    `json:"score"`
 		Kids        []int  `json:"kids"`
@@ -47,13 +46,9 @@ func (s *server) Story() Handle {
 			return err
 		}
 
-		return s.templates.ExecuteTemplate(
-			w,
-			"story.gohtml",
-			Data{
-				Story:         story,
-				IncludeLayout: r.Header["Hx-Request"] == nil,
-			},
-		)
+		return s.renderTemplate(w, "story.gohtml", Data{
+			Story:         story,
+			IncludeLayout: r.Header["Hx-Request"] == nil,
+		})
 	}
 }

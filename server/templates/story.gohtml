@@ -1,10 +1,24 @@
 {{if .IncludeLayout}}{{template "start"}}{{end}}
-<article class="story">
+<article class="story{{if .IncludeLayout}} expanded{{end}}">
     <a href="{{.Story.Url}}" target="_blank" title="{{.Story.Title}}" class="title">{{.Story.Title}}</a>
     <footer>
         <span>{{.Story.Score}} points by {{.Story.By}}</span>
         <span data-timestamp>{{.Story.Time}}</span>
-        <span>{{.Story.Descendants}} comments</span>
+        {{if not .IncludeLayout}}
+        <a href="/story/{{.Story.Id}}">
+          {{.Story.Descendants}} comments
+        </a>
+        {{end}}
     </footer>
+    {{if .IncludeLayout}}
+    <section class="comments">
+      {{range $id := .Story.Kids}}
+      <article class="comment" hx-get="/comment/{{$id}}?embed" hx-trigger="revealed" hx-swap="outerHTML">
+        <p>{{template "skeleton" .}}</p>
+        <footer>{{template "skeleton" .}}</footer>
+      </article>
+      {{end}}
+    </section>
+    {{end}}
 </article>
 {{if .IncludeLayout}}{{template "end"}}{{end}}
