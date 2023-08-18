@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"embed"
 	"io"
-	"math/rand"
 	"text/template"
 )
 
@@ -14,11 +13,7 @@ var (
 )
 
 func (s *server) setupTemplates() error {
-	templates, err := template.New("templates").Funcs(template.FuncMap{
-		"randomInt": func(min int, max int) int {
-			return rand.Intn(max-min+1) + min
-		},
-	}).ParseFS(templatesFS, "templates/*.gohtml")
+	templates, err := template.New("templates").ParseFS(templatesFS, "templates/*.gohtml")
 
 	s.templates = templates
 
