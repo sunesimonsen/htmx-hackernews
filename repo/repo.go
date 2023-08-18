@@ -25,7 +25,7 @@ func (host Host) LoadJson(path string, target any) error {
 	if err != nil {
 		return err
 	}
-	req.Header.Add("Accept", "application/json")
+	req.Header.Set("Accept", "application/json")
 
 	response, err := http.DefaultClient.Do(req)
 	if err != nil {

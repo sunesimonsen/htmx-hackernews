@@ -23,7 +23,7 @@ func (s *server) Comment() Handle {
 
 		includeLayout := r.Header["Hx-Request"] == nil
 
-		return s.renderTemplate(w, "comment.gohtml", Data{
+		return s.renderTemplate(w, r, "comment.gohtml", Data{
 			Comment:          comment,
 			IncludeLayout:    includeLayout,
 			ShowCommentsLink: !includeLayout && comment.Answers > 0,

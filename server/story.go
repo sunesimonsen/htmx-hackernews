@@ -23,7 +23,7 @@ func (s *server) Story() Handle {
 
 		includeLayout := r.Header["Hx-Request"] == nil
 
-		return s.renderTemplate(w, "story.gohtml", Data{
+		return s.renderTemplate(w, r, "story.gohtml", Data{
 			Story:            story,
 			IncludeLayout:    includeLayout,
 			ShowCommentsLink: !includeLayout && len(story.Kids) > 0,

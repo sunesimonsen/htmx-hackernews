@@ -18,7 +18,7 @@ func (s *server) TopStories() Handle {
 			return err
 		}
 
-		return s.renderTemplate(w, "topstories.gohtml", Data{
+		return s.renderTemplate(w, r, "topstories.gohtml", Data{
 			Ids: ids,
 		})
 	}
