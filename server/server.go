@@ -5,11 +5,13 @@ import (
 	"text/template"
 
 	"github.com/julienschmidt/httprouter"
+	"github.com/sunesimonsen/htmx-hackernews/repo"
 )
 
 type server struct {
 	templates *template.Template
 	router    *httprouter.Router
+	repo      repo.Host
 }
 
 func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -25,6 +27,7 @@ func NewServer() (*server, error) {
 		return nil, err
 	}
 
+	s.repo = repo.HackerNewsHost()
 	s.setupRoutes()
 
 	return s, nil
