@@ -9,6 +9,12 @@ import (
 	"github.com/alecthomas/assert/v2"
 )
 
+func newFailingTestServer(code int) *httptest.Server {
+	return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		http.Error(w, http.StatusText(code), code)
+	}))
+}
+
 func newTestServer(t *testing.T, path string, response any) *httptest.Server {
 	return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path != path {

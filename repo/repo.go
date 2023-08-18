@@ -32,6 +32,12 @@ func (host Host) LoadJson(path string, target any) error {
 		return err
 	}
 
+	if response.StatusCode >= 300 {
+		return HttpError{
+			StatusCode: response.StatusCode,
+		}
+	}
+
 	data, err := io.ReadAll(response.Body)
 	if err != nil && err != io.EOF {
 		return err

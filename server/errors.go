@@ -7,18 +7,10 @@ import (
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
+	"github.com/sunesimonsen/htmx-hackernews/repo"
 )
 
 type Handle func(http.ResponseWriter, *http.Request, httprouter.Params) error
-
-type HttpError struct {
-	Code int
-	Text string
-}
-
-func (e HttpError) Error() string {
-	return http.StatusText(e.Code) + ": " + e.Text
-}
 
 type BufferedResponseWriter struct {
 	wrapped    http.ResponseWriter
@@ -30,13 +22,13 @@ type BufferedResponseWriter struct {
 func WithErrorHandling(handle Handle) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		err := handle(w, r, ps)
-		httpError := &HttpError{}
+		httpError := &repo.HttpError{}
 		if errors.As(err, httpError) {
 			fmt.Println(err)
 			http.Error(
 				w,
 				httpError.Error(),
-				httpError.Code,
+				httpError.StatusCode,
 			)
 		} else if err != nil {
 			fmt.Println(err)

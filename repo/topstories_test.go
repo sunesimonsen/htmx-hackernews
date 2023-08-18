@@ -20,4 +20,14 @@ func TestGetTopStoryIds(t *testing.T) {
 		assert.NoError(t, err)
 		assert.Equal(t, ids, responseIds)
 	})
+
+	t.Run("with a HTTP error", func(t *testing.T) {
+		server := newFailingTestServer(500)
+		defer server.Close()
+
+		host := NewHost(server.URL)
+
+		_, err := host.GetTopStoryIds()
+		assert.EqualError(t, err, "500 Internal Server Error")
+	})
 }

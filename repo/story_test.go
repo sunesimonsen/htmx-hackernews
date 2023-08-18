@@ -32,4 +32,14 @@ func TestGetStory(t *testing.T) {
 		_, err := host.GetStory("42")
 		assert.EqualError(t, err, "Not found: story 42")
 	})
+
+	t.Run("with a HTTP error", func(t *testing.T) {
+		server := newFailingTestServer(500)
+		defer server.Close()
+
+		host := NewHost(server.URL)
+
+		_, err := host.GetStory("42")
+		assert.EqualError(t, err, "500 Internal Server Error")
+	})
 }
