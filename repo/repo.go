@@ -10,14 +10,24 @@ type Host struct {
 	url string
 }
 
+func NewHost(url string) Host {
+	return Host{url: url}
+}
+
 func HackerNewsHost() Host {
-	return Host{url: "https://hacker-news.firebaseio.com"}
+	return NewHost("https://hacker-news.firebaseio.com")
 }
 
 func (host Host) LoadJson(path string, target any) error {
 	url := host.url + path
 
-	response, err := http.Get(url)
+	req, err := http.NewRequest(http.MethodGet, url, nil)
+	if err != nil {
+		return err
+	}
+	req.Header.Add("Accept", "application/json")
+
+	response, err := http.DefaultClient.Do(req)
 	if err != nil {
 		return err
 	}
