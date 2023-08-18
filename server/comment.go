@@ -21,9 +21,9 @@ func (s *server) Comment() Handle {
 	}
 
 	type Data struct {
-		Comment       Comment
-		ShowComments  bool
-		IncludeLayout bool
+		Comment          Comment
+		ShowCommentsLink bool
+		IncludeLayout    bool
 	}
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) error {
@@ -46,12 +46,13 @@ func (s *server) Comment() Handle {
 			return err
 		}
 
+		includeLayout := r.Header["Hx-Request"] == nil
 		comment.Answers = len(comment.Kids)
 
 		return s.renderTemplate(w, "comment.gohtml", Data{
-			Comment:       comment,
-			ShowComments:  showComments(r),
-			IncludeLayout: r.Header["Hx-Request"] == nil,
+			Comment:          comment,
+			IncludeLayout:    includeLayout,
+			ShowCommentsLink: !includeLayout && comment.Answers > 0,
 		})
 	}
 }

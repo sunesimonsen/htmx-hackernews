@@ -51,14 +51,12 @@ header {
   margin-bottom: 8px;
 }
 
-.comment {
-  font-size: smaller;
-}
-
 .comments > .comment {
   border-top: thin solid #ccc;
   margin-top: 1em;
   padding-top: 1em;
+  font-size: smaller;
+  padding-inline-start: 0.5em;
 }
 
 .comment.expanded {

@@ -22,8 +22,9 @@ func (s *server) Story() Handle {
 	}
 
 	type Data struct {
-		Story         Story
-		IncludeLayout bool
+		Story            Story
+		IncludeLayout    bool
+		ShowCommentsLink bool
 	}
 
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) error {
@@ -46,9 +47,12 @@ func (s *server) Story() Handle {
 			return err
 		}
 
+		includeLayout := r.Header["Hx-Request"] == nil
+
 		return s.renderTemplate(w, "story.gohtml", Data{
-			Story:         story,
-			IncludeLayout: r.Header["Hx-Request"] == nil,
+			Story:            story,
+			IncludeLayout:    includeLayout,
+			ShowCommentsLink: !includeLayout && len(story.Kids) > 0,
 		})
 	}
 }

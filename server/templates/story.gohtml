@@ -4,7 +4,7 @@
     <footer>
         <span>{{.Story.Score}} points by {{.Story.By}}</span>
         <span data-timestamp>{{.Story.Time}}</span>
-        {{if not .IncludeLayout}}
+        {{if .ShowCommentsLink}}
         <a href="/story/{{.Story.Id}}">
           {{.Story.Descendants}} comments
         </a>
