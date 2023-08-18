@@ -18,7 +18,11 @@ func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	s.router.ServeHTTP(w, r)
 }
 
-func NewServer() (*server, error) {
+type Config struct {
+	RepoHost repo.Host
+}
+
+func NewServer(config Config) (*server, error) {
 	router := httprouter.New()
 
 	s := &server{router: router}
@@ -27,7 +31,7 @@ func NewServer() (*server, error) {
 		return nil, err
 	}
 
-	s.repo = repo.HackerNewsHost()
+	s.repo = config.RepoHost
 	s.setupRoutes()
 
 	return s, nil

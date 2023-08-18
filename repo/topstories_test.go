@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/alecthomas/assert/v2"
+	"github.com/sunesimonsen/htmx-hackernews/mock"
 )
 
 func TestGetTopStoryIds(t *testing.T) {
@@ -11,7 +12,7 @@ func TestGetTopStoryIds(t *testing.T) {
 		responseIds := []int{
 			0, 1, 2, 3, 4,
 		}
-		server := newTestServer(t, "/v0/topstories.json", responseIds)
+		server := mock.NewServer(t, "/v0/topstories.json", responseIds)
 		defer server.Close()
 
 		host := NewHost(server.URL)
@@ -22,7 +23,7 @@ func TestGetTopStoryIds(t *testing.T) {
 	})
 
 	t.Run("with a HTTP error", func(t *testing.T) {
-		server := newFailingTestServer(500)
+		server := mock.NewFailingServer(500)
 		defer server.Close()
 
 		host := NewHost(server.URL)

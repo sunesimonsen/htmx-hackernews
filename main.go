@@ -5,11 +5,16 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/sunesimonsen/htmx-hackernews/repo"
 	"github.com/sunesimonsen/htmx-hackernews/server"
 )
 
 func main() {
-	server, err := server.NewServer()
+	config := server.Config{
+		RepoHost: repo.HackerNewsHost(),
+	}
+
+	server, err := server.NewServer(config)
 	if err != nil {
 		log.Fatal(err)
 	}

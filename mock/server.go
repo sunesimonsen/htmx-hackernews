@@ -1,4 +1,4 @@
-package repo
+package mock
 
 import (
 	"encoding/json"
@@ -9,13 +9,13 @@ import (
 	"github.com/alecthomas/assert/v2"
 )
 
-func newFailingTestServer(code int) *httptest.Server {
+func NewFailingServer(code int) *httptest.Server {
 	return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, http.StatusText(code), code)
 	}))
 }
 
-func newTestServer(t *testing.T, path string, response any) *httptest.Server {
+func NewServer(t *testing.T, path string, response any) *httptest.Server {
 	return httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path != path {
 			t.Errorf("Expected to request '%s', got: %s", path, r.URL.Path)
