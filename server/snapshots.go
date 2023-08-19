@@ -5,10 +5,10 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/alecthomas/assert/v2"
 	"github.com/gkampitakis/go-snaps/snaps"
 	"github.com/sunesimonsen/htmx-hackernews/mock"
 	"github.com/sunesimonsen/htmx-hackernews/repo"
-	"github.com/tj/assert"
 )
 
 func snapshotBody(t *testing.T, path string, upstreamPath string, responseObject any) {

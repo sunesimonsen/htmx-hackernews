@@ -1,0 +1,25 @@
+
+[TestTopStoriesView/when_the_view_renders_succesfully - 1]
+
+    <article class="story" hx-get="/story/42?embed" hx-trigger="revealed" hx-swap="outerHTML">
+        <a class="title"><div class="skeleton" style="width: 60%"></div></a>
+        <footer><div class="skeleton" style="width: 40%"></div></footer>
+    </article>
+
+    <article class="story" hx-get="/story/3545?embed" hx-trigger="revealed" hx-swap="outerHTML">
+        <a class="title"><div class="skeleton" style="width: 60%"></div></a>
+        <footer><div class="skeleton" style="width: 40%"></div></footer>
+    </article>
+
+    <article class="story" hx-get="/story/345?embed" hx-trigger="revealed" hx-swap="outerHTML">
+        <a class="title"><div class="skeleton" style="width: 60%"></div></a>
+        <footer><div class="skeleton" style="width: 40%"></div></footer>
+    </article>
+
+    <article class="story" hx-get="/story/1?embed" hx-trigger="revealed" hx-swap="outerHTML">
+        <a class="title"><div class="skeleton" style="width: 60%"></div></a>
+        <footer><div class="skeleton" style="width: 40%"></div></footer>
+    </article>
+
+
+---
