@@ -1,11 +1,13 @@
 package view
 
+import "github.com/sunesimonsen/htmx-hackernews/templates"
+
 type TopStoriesRepo interface {
 	GetTopStoryIds() ([]int, error)
 }
 
 type TopStoriesView struct {
-	Templates TemplateRenderer
+	Templates templates.Renderer
 	Repo      TopStoriesRepo
 }
 

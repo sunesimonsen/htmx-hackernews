@@ -1,4 +1,4 @@
-package view
+package templates
 
 import (
 	"bytes"
@@ -11,20 +11,20 @@ var (
 	templatesFS embed.FS
 )
 
-type TemplateRenderer struct {
+type Renderer struct {
 	templates *template.Template
 }
 
-func NewTemplateRenderer() TemplateRenderer {
+func NewRenderer() Renderer {
 	templates, err := template.New("templates").ParseFS(templatesFS, "templates/*.gohtml")
 	if err != nil {
 		panic(err)
 	}
 
-	return TemplateRenderer{templates: templates}
+	return Renderer{templates: templates}
 }
 
-func (tr TemplateRenderer) Render(template string, data any) ([]byte, error) {
+func (tr Renderer) Render(template string, data any) ([]byte, error) {
 	buf := &bytes.Buffer{}
 	buf.Grow(512)
 

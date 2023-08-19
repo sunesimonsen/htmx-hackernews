@@ -1,13 +1,16 @@
 package view
 
-import "github.com/sunesimonsen/htmx-hackernews/model"
+import (
+	"github.com/sunesimonsen/htmx-hackernews/model"
+	"github.com/sunesimonsen/htmx-hackernews/templates"
+)
 
 type StoryRepo interface {
 	GetStory(id string) (model.Story, error)
 }
 
 type StoryView struct {
-	Templates TemplateRenderer
+	Templates templates.Renderer
 	Repo      StoryRepo
 }
 

@@ -5,11 +5,11 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/sunesimonsen/htmx-hackernews/repo"
-	"github.com/sunesimonsen/htmx-hackernews/view"
+	"github.com/sunesimonsen/htmx-hackernews/templates"
 )
 
 type server struct {
-	templates view.TemplateRenderer
+	templates templates.Renderer
 	router    *httprouter.Router
 	repo      repo.Host
 }
@@ -27,7 +27,7 @@ func NewServer(config Config) (*server, error) {
 
 	s := &server{router: router}
 
-	s.templates = view.NewTemplateRenderer()
+	s.templates = templates.NewRenderer()
 	s.repo = config.RepoHost
 
 	s.setupRoutes()

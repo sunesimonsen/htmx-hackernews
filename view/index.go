@@ -1,7 +1,9 @@
 package view
 
+import "github.com/sunesimonsen/htmx-hackernews/templates"
+
 type IndexView struct {
-	Templates TemplateRenderer
+	Templates templates.Renderer
 }
 
 func (v IndexView) Render(params Params, headers Headers) ([]byte, error) {

@@ -1,13 +1,16 @@
 package view
 
-import "github.com/sunesimonsen/htmx-hackernews/model"
+import (
+	"github.com/sunesimonsen/htmx-hackernews/model"
+	"github.com/sunesimonsen/htmx-hackernews/templates"
+)
 
 type CommentRepo interface {
 	GetComment(id string) (model.Comment, error)
 }
 
 type CommentView struct {
-	Templates TemplateRenderer
+	Templates templates.Renderer
 	Repo      CommentRepo
 }
 
