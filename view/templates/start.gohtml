@@ -1,0 +1,16 @@
+{{define "start"}}
+<html lang="en">
+<head>
+    <title>Hackernews</title>
+    <meta charset="UTF-8"/>
+    <meta name="description" content="Hackernews example app in htmx and Go" lang="en"/>
+    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+    <script src="https://unpkg.com/htmx.org@1.9.4" integrity="sha384-zUfuhFKKZCbHTY6aRR46gxiqszMk5tcHjsVFxnUo8VMus4kHGVdIYVbOYYNlKmHV" crossorigin="anonymous"></script>
+    <script src="/assets/scripts.js"></script>
+    <link rel="stylesheet" href="/assets/main.css">
+</head>
+<body>
+  <main>
+    {{template "header" .}}
+    <section class="content">
+{{end}}
