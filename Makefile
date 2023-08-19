@@ -3,5 +3,5 @@ deploy:
 	gcloud app deploy
 
 .PHONY: browse
-browse: deploy
+browse:
 	gcloud app browse
