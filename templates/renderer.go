@@ -16,10 +16,7 @@ type Renderer struct {
 }
 
 func NewRenderer() Renderer {
-	templates, err := template.New("templates").ParseFS(templatesFS, "templates/*.gohtml")
-	if err != nil {
-		panic(err)
-	}
+	templates := template.Must(template.New("templates").ParseFS(templatesFS, "templates/*.gohtml"))
 
 	return Renderer{templates: templates}
 }
