@@ -1,0 +1,8 @@
+{{define "content"}}
+    {{range $id := .Ids}}
+        <article class="story" hx-get="/story/{{$id}}" hx-trigger="revealed" hx-swap="outerHTML">
+            <a class="title"><div class="skeleton" style="width: 60%"></div></a>
+            <footer><div class="skeleton" style="width: 40%"></div></footer>
+        </article>
+    {{end}}
+{{end}}

@@ -1,8 +1,8 @@
 
 [TestGetComment/with_a_succesful_response - 1]
-
+ 
 <html lang="en">
-<head>
+  <head>
     <title>Hackernews</title>
     <meta charset="UTF-8"/>
     <meta name="description" content="Hackernews example app in htmx and Go" lang="en"/>
@@ -10,10 +10,10 @@
     <script src="https://unpkg.com/htmx.org@1.9.4" integrity="sha384-zUfuhFKKZCbHTY6aRR46gxiqszMk5tcHjsVFxnUo8VMus4kHGVdIYVbOYYNlKmHV" crossorigin="anonymous"></script>
     <script src="/assets/scripts.js"></script>
     <link rel="stylesheet" href="/assets/main.css">
-</head>
-<body>
-  <main>
-    
+  </head>
+  <body>
+    <main>
+      
 <header class="topBar">
   
 <a class="logo" href="/">
@@ -23,26 +23,25 @@
 
 </header>
 
-    <section class="content">
-
-<article class="comment expanded">
-    The link seems to be Slashdotted into oblivion.
-    <footer>
-        <span>CapitalistCartr</span>
-        <span data-timestamp>1692369360</span>
+      <section class="content">
         
-    </footer>
-    
-    <section class="comments">
+  <article class="comment expanded">
+      The link seems to be Slashdotted into oblivion.
+      <footer>
+          <span>CapitalistCartr</span>
+          <span data-timestamp>1692369360</span>
+          
+      </footer>
       
-    </section>
-    
-</article>
+      <section class="comments">
+        
+      </section>
+      
+  </article>
 
-    </section>
-  </main>
-</body>
+      </section>
+    </main>
+  </body>
 </html>
-
-
+ 
 ---

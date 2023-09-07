@@ -26,13 +26,29 @@ func (ps paramsWrapper) Get(name string) string {
 	return ps.ByName(name)
 }
 
+type Options struct {
+	IncludeLayout bool
+	Layout        string
+}
+
 type View interface {
-	Render(params Params, headers Headers) ([]byte, error)
+	Render(params Params, headers Headers, opt Options) ([]byte, error)
 }
 
 func WithView(view View) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-		data, err := view.Render(paramsWrapper{ps}, r.Header)
+		includeLayout := r.Header.Get("Hx-Request") == ""
+
+		options := Options{
+			IncludeLayout: includeLayout,
+			Layout:        "content",
+		}
+
+		if includeLayout {
+			options.Layout = "main"
+		}
+
+		data, err := view.Render(paramsWrapper{ps}, r.Header, options)
 
 		httpError := &repo.HttpError{}
 		if errors.As(err, httpError) {
@@ -61,7 +77,7 @@ func WithView(view View) httprouter.Handle {
 
 		w.Header().Set("Content-Type", "text/html")
 		w.Header().Set("Etag", e)
-		w.Header().Set("Cache-Control", "max-age=10")
+		w.Header().Set("Cache-Control", "max-age=0")
 
 		w.Write(data)
 	}

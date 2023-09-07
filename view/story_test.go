@@ -18,7 +18,11 @@ func TestStoryView(t *testing.T) {
 		testerr := errors.New("test")
 		repo := mock.StoryRepo{Err: testerr}
 		view := StoryView{Repo: repo}
-		_, err := view.Render(mock.Params{"id": "42"}, mock.Headers{})
+		_, err := view.Render(
+			mock.Params{"id": "42"},
+			mock.Headers{},
+			Options{Layout: "content"},
+		)
 		assert.Equal(t, err, testerr)
 	})
 
@@ -36,7 +40,11 @@ func TestStoryView(t *testing.T) {
 		repo := mock.StoryRepo{Story: story}
 		view := StoryView{Repo: repo, Templates: renderer}
 
-		data, err := view.Render(mock.Params{"id": "37173339"}, mock.Headers{"Hx-Request": "true"})
+		data, err := view.Render(
+			mock.Params{"id": "37173339"},
+			mock.Headers{"Hx-Request": "true"},
+			Options{Layout: "content"},
+		)
 
 		assert.NoError(t, err)
 		snaps.MatchSnapshot(t, string(data))

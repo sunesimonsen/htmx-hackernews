@@ -18,7 +18,11 @@ func TestCommentView(t *testing.T) {
 		testerr := errors.New("test")
 		repo := mock.CommentRepo{Err: testerr}
 		view := CommentView{Repo: repo}
-		_, err := view.Render(mock.Params{"id": "42"}, mock.Headers{})
+		_, err := view.Render(
+			mock.Params{"id": "42"},
+			mock.Headers{},
+			Options{Layout: "content"},
+		)
 		assert.Equal(t, err, testerr)
 	})
 
@@ -33,7 +37,11 @@ func TestCommentView(t *testing.T) {
 		repo := mock.CommentRepo{Comment: comment}
 		view := CommentView{Repo: repo, Templates: renderer}
 
-		data, err := view.Render(mock.Params{"id": "37176230"}, mock.Headers{"Hx-Request": "true"})
+		data, err := view.Render(
+			mock.Params{"id": "37176230"},
+			mock.Headers{"Hx-Request": "true"},
+			Options{Layout: "content"},
+		)
 
 		assert.NoError(t, err)
 		snaps.MatchSnapshot(t, string(data))

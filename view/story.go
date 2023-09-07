@@ -14,7 +14,7 @@ type StoryView struct {
 	Repo      StoryRepo
 }
 
-func (v StoryView) Render(params Params, headers Headers) ([]byte, error) {
+func (v StoryView) Render(params Params, headers Headers, opt Options) ([]byte, error) {
 	type Data struct {
 		Story            model.Story
 		IncludeLayout    bool
@@ -27,11 +27,9 @@ func (v StoryView) Render(params Params, headers Headers) ([]byte, error) {
 		return nil, err
 	}
 
-	includeLayout := headers.Get("Hx-Request") == ""
-
-	return v.Templates.Render("story.gohtml", Data{
+	return v.Templates.Render("story.gohtml", opt.Layout, Data{
 		Story:            story,
-		IncludeLayout:    includeLayout,
-		ShowCommentsLink: !includeLayout && len(story.Kids) > 0,
+		IncludeLayout:    opt.IncludeLayout,
+		ShowCommentsLink: !opt.IncludeLayout && len(story.Kids) > 0,
 	})
 }
