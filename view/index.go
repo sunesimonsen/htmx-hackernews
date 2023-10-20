@@ -6,6 +6,6 @@ type IndexView struct {
 	Templates templates.Renderer
 }
 
-func (v IndexView) Render(params Params, headers Headers) ([]byte, error) {
-	return v.Templates.Render("index.gohtml", nil)
+func (v IndexView) Render(params Params, headers Headers, opt Options) ([]byte, error) {
+	return v.Templates.Render("index.gohtml", opt.Layout, nil)
 }

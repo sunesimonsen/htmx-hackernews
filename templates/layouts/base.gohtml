@@ -1,6 +1,6 @@
-{{define "start"}}
+{{define "base"}}
 <html lang="en">
-<head>
+  <head>
     <title>Hackernews</title>
     <meta charset="UTF-8"/>
     <meta name="description" content="Hackernews example app in htmx and Go" lang="en"/>
@@ -8,9 +8,14 @@
     <script src="https://unpkg.com/htmx.org@1.9.4" integrity="sha384-zUfuhFKKZCbHTY6aRR46gxiqszMk5tcHjsVFxnUo8VMus4kHGVdIYVbOYYNlKmHV" crossorigin="anonymous"></script>
     <script src="/assets/scripts.js"></script>
     <link rel="stylesheet" href="/assets/main.css">
-</head>
-<body>
-  <main>
-    {{template "header" .}}
-    <section class="content">
+  </head>
+  <body>
+    <main>
+      {{template "header"}}
+      <section class="content">
+        {{template "content" .}}
+      </section>
+    </main>
+  </body>
+</html>
 {{end}}

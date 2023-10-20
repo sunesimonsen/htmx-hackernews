@@ -15,7 +15,11 @@ func TestIndexView(t *testing.T) {
 	t.Run("when the view renders succesfully", func(t *testing.T) {
 		view := IndexView{Templates: renderer}
 
-		data, err := view.Render(mock.Params{}, mock.Headers{})
+		data, err := view.Render(
+			mock.Params{},
+			mock.Headers{},
+			Options{Layout: "content"},
+		)
 
 		assert.NoError(t, err)
 		snaps.MatchSnapshot(t, string(data))

@@ -17,7 +17,11 @@ func TestTopStoriesView(t *testing.T) {
 		testerr := errors.New("test")
 		repo := mock.TopStoryIdsRepo{Err: testerr}
 		view := TopStoriesView{Repo: repo, Templates: renderer}
-		_, err := view.Render(mock.Params{}, mock.Headers{})
+		_, err := view.Render(
+			mock.Params{},
+			mock.Headers{},
+			Options{Layout: "content"},
+		)
 		assert.Equal(t, err, testerr)
 	})
 
@@ -26,7 +30,11 @@ func TestTopStoriesView(t *testing.T) {
 		repo := mock.TopStoryIdsRepo{Ids: ids}
 		view := TopStoriesView{Repo: repo, Templates: renderer}
 
-		data, err := view.Render(mock.Params{}, mock.Headers{})
+		data, err := view.Render(
+			mock.Params{},
+			mock.Headers{},
+			Options{Layout: "content"},
+		)
 
 		assert.NoError(t, err)
 		snaps.MatchSnapshot(t, string(data))

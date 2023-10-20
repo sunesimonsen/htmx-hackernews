@@ -1,0 +1,26 @@
+{{define "content"}}
+  <article class="story{{if .IncludeLayout}} expanded{{end}}">
+      <a href="{{.Story.Url}}" target="_blank" title="{{.Story.Title}}" class="title">{{.Story.Title}}</a>
+      <footer>
+          <span>{{.Story.Score}} points by {{.Story.By}}</span>
+          <span data-timestamp>{{.Story.Time}}</span>
+          {{if .ShowCommentsLink}}
+          <a href="/story/{{.Story.Id}}">
+            {{.Story.Descendants}} comments
+          </a>
+          {{end}}
+      </footer>
+      {{if .IncludeLayout}}
+      <section class="comments">
+        {{range $id := .Story.Kids}}
+        <article class="comment" hx-get="/comment/{{$id}}?embed" hx-trigger="revealed" hx-swap="outerHTML">
+          <p><div class="skeleton" style="width: 60%"></div></p>
+          <p><div class="skeleton" style="width: 70%"></div></p>
+          <p><div class="skeleton" style="width: 50%"></div></p>
+          <footer><div class="skeleton" style="width: 40%"></div></footer>
+        </article>
+        {{end}}
+      </section>
+      {{end}}
+  </article>
+{{end}}

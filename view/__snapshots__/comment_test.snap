@@ -1,15 +1,14 @@
 
 [TestCommentView/when_the_view_renders_succesfully - 1]
 
-<article class="comment">
-    The link seems to be Slashdotted into oblivion.
-    <footer>
-        <span>CapitalistCartr</span>
-        <span data-timestamp>1692369360</span>
-        
-    </footer>
-    
-</article>
-
+  <article class="comment">
+      The link seems to be Slashdotted into oblivion.
+      <footer>
+          <span>CapitalistCartr</span>
+          <span data-timestamp>1692369360</span>
+          
+      </footer>
+      
+  </article>
 
 ---

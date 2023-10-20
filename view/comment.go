@@ -14,11 +14,11 @@ type CommentView struct {
 	Repo      CommentRepo
 }
 
-func (v CommentView) Render(params Params, headers Headers) ([]byte, error) {
+func (v CommentView) Render(params Params, headers Headers, opt Options) ([]byte, error) {
 	type Data struct {
 		Comment          model.Comment
-		ShowCommentsLink bool
 		IncludeLayout    bool
+		ShowCommentsLink bool
 	}
 
 	comment, err := v.Repo.GetComment(params.Get("id"))
@@ -27,11 +27,9 @@ func (v CommentView) Render(params Params, headers Headers) ([]byte, error) {
 		return nil, err
 	}
 
-	includeLayout := headers.Get("Hx-Request") == ""
-
-	return v.Templates.Render("comment.gohtml", Data{
+	return v.Templates.Render("comment.gohtml", opt.Layout, Data{
 		Comment:          comment,
-		IncludeLayout:    includeLayout,
-		ShowCommentsLink: !includeLayout && comment.Answers > 0,
+		IncludeLayout:    opt.IncludeLayout,
+		ShowCommentsLink: !opt.IncludeLayout && comment.Answers > 0,
 	})
 }
