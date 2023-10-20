@@ -1,7 +1,11 @@
-.PHONY: deploy
 deploy:
 	gcloud app deploy
 
-.PHONY: browse
 browse:
 	gcloud app browse
+
+test:
+	go test ./...
+
+cover:
+	go test ./... -cover

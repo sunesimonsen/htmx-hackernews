@@ -1,6 +1,6 @@
 module github.com/sunesimonsen/htmx-hackernews
 
-go 1.20
+go 1.21
 
 require (
 	github.com/alecthomas/assert/v2 v2.3.0
