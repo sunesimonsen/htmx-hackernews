@@ -1,11 +1,8 @@
 package view
 
-import "github.com/sunesimonsen/htmx-hackernews/templates"
+type IndexView struct{}
+type IndexViewData struct{}
 
-type IndexView struct {
-	Templates templates.Renderer
-}
-
-func (v IndexView) Render(params Params, headers Headers, opt Options) ([]byte, error) {
-	return v.Templates.Render("index.gohtml", opt.Layout, nil)
+func (v IndexView) Data(params Params, headers Headers, opt Options) (ViewData[IndexViewData], error) {
+	return ViewData[IndexViewData]{Template: "index.gohtml"}, nil
 }

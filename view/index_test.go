@@ -4,24 +4,23 @@ import (
 	"testing"
 
 	"github.com/alecthomas/assert/v2"
-	"github.com/gkampitakis/go-snaps/snaps"
 	"github.com/sunesimonsen/htmx-hackernews/mock"
-	"github.com/sunesimonsen/htmx-hackernews/templates"
 )
 
 func TestIndexView(t *testing.T) {
-	renderer := templates.NewRenderer()
-
 	t.Run("when the view renders succesfully", func(t *testing.T) {
-		view := IndexView{Templates: renderer}
+		view := IndexView{}
 
-		data, err := view.Render(
+		data, err := view.Data(
 			mock.Params{},
 			mock.Headers{},
 			Options{Layout: "content"},
 		)
 
 		assert.NoError(t, err)
-		snaps.MatchSnapshot(t, string(data))
+		assert.Equal(t, data, ViewData[IndexViewData]{
+			Template: "index.gohtml",
+			HashKey:  "",
+		})
 	})
 }

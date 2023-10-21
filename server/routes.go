@@ -8,16 +8,20 @@ import (
 
 func (s *server) setupRoutes() {
 	s.router.GET("/", view.WithView(
-		view.IndexView{Templates: s.templates},
+		s.templates,
+		view.IndexView{},
 	))
 	s.router.GET("/topstories", view.WithView(
-		view.TopStoriesView{Templates: s.templates, Repo: s.repo},
+		s.templates,
+		view.TopStoriesView{Repo: s.repo},
 	))
 	s.router.GET("/story/:id", view.WithView(
-		view.StoryView{Templates: s.templates, Repo: s.repo},
+		s.templates,
+		view.StoryView{Repo: s.repo},
 	))
 	s.router.GET("/comment/:id", view.WithView(
-		view.CommentView{Templates: s.templates, Repo: s.repo},
+		s.templates,
+		view.CommentView{Repo: s.repo},
 	))
 	s.router.ServeFiles("/assets/*filepath", http.Dir("server/assets"))
 }

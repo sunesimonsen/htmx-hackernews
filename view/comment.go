@@ -1,8 +1,9 @@
 package view
 
 import (
+	"fmt"
+
 	"github.com/sunesimonsen/htmx-hackernews/model"
-	"github.com/sunesimonsen/htmx-hackernews/templates"
 )
 
 type CommentRepo interface {
@@ -10,26 +11,33 @@ type CommentRepo interface {
 }
 
 type CommentView struct {
-	Templates templates.Renderer
-	Repo      CommentRepo
+	Repo CommentRepo
 }
 
-func (v CommentView) Render(params Params, headers Headers, opt Options) ([]byte, error) {
-	type Data struct {
-		Comment          model.Comment
-		IncludeLayout    bool
-		ShowCommentsLink bool
+type CommentViewData struct {
+	Comment          model.Comment
+	IncludeLayout    bool
+	ShowCommentsLink bool
+}
+
+func (v CommentView) Data(params Params, headers Headers, opt Options) (ViewData[CommentViewData], error) {
+	result := ViewData[CommentViewData]{
+		Template: "comment.gohtml",
 	}
 
 	comment, err := v.Repo.GetComment(params.Get("id"))
 
 	if err != nil {
-		return nil, err
+		return result, err
 	}
 
-	return v.Templates.Render("comment.gohtml", opt.Layout, Data{
+	result.Data = CommentViewData{
 		Comment:          comment,
 		IncludeLayout:    opt.IncludeLayout,
 		ShowCommentsLink: !opt.IncludeLayout && comment.Answers > 0,
-	})
+	}
+
+	result.HashKey = fmt.Sprintf("answers:%d", comment.Answers)
+
+	return result, err
 }
