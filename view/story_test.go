@@ -5,20 +5,16 @@ import (
 	"testing"
 
 	"github.com/alecthomas/assert/v2"
-	"github.com/gkampitakis/go-snaps/snaps"
 	"github.com/sunesimonsen/htmx-hackernews/mock"
 	"github.com/sunesimonsen/htmx-hackernews/model"
-	"github.com/sunesimonsen/htmx-hackernews/templates"
 )
 
 func TestStoryView(t *testing.T) {
-	renderer := templates.NewRenderer()
-
 	t.Run("when the repository returns an error", func(t *testing.T) {
 		testerr := errors.New("test")
 		repo := mock.StoryRepo{Err: testerr}
 		view := StoryView{Repo: repo}
-		_, err := view.Render(
+		_, err := view.Data(
 			mock.Params{"id": "42"},
 			mock.Headers{},
 			Options{Layout: "content"},
@@ -38,15 +34,22 @@ func TestStoryView(t *testing.T) {
 			Url:         "https://www.sjoerdlangkemper.nl/2023/08/16/session-timeout/",
 		}
 		repo := mock.StoryRepo{Story: story}
-		view := StoryView{Repo: repo, Templates: renderer}
+		view := StoryView{Repo: repo}
 
-		data, err := view.Render(
+		data, err := view.Data(
 			mock.Params{"id": "37173339"},
 			mock.Headers{"Hx-Request": "true"},
 			Options{Layout: "content"},
 		)
 
 		assert.NoError(t, err)
-		snaps.MatchSnapshot(t, string(data))
+		assert.Equal(t, data, ViewData[StoryViewData]{
+			Template: "story.gohtml",
+			HashKey:  "descendants:112,score:191",
+			Data: StoryViewData{
+				Story:            story,
+				ShowCommentsLink: true,
+			},
+		})
 	})
 }

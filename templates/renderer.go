@@ -1,9 +1,9 @@
 package templates
 
 import (
-	"bytes"
 	"embed"
 	"fmt"
+	"io"
 	"io/fs"
 	"path/filepath"
 	"text/template"
@@ -63,20 +63,12 @@ func NewRenderer() Renderer {
 	return Renderer{templates: templates}
 }
 
-func (tr Renderer) Render(templateName string, layout string, data any) ([]byte, error) {
-	buf := &bytes.Buffer{}
-	buf.Grow(512)
-
+func (tr Renderer) Render(writer io.Writer, templateName string, layout string, data any) error {
 	template, ok := tr.templates[templateName]
+
 	if !ok {
-		return nil, fmt.Errorf("Template doesn't exist: %s", templateName)
+		return fmt.Errorf("Template doesn't exist: %s", templateName)
 	}
 
-	if layout == "" {
-		layout = "main"
-	}
-
-	err := template.ExecuteTemplate(buf, layout, data)
-
-	return buf.Bytes(), err
+	return template.ExecuteTemplate(writer, layout, data)
 }

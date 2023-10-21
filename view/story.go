@@ -1,8 +1,9 @@
 package view
 
 import (
+	"fmt"
+
 	"github.com/sunesimonsen/htmx-hackernews/model"
-	"github.com/sunesimonsen/htmx-hackernews/templates"
 )
 
 type StoryRepo interface {
@@ -10,26 +11,37 @@ type StoryRepo interface {
 }
 
 type StoryView struct {
-	Templates templates.Renderer
-	Repo      StoryRepo
+	Repo StoryRepo
 }
 
-func (v StoryView) Render(params Params, headers Headers, opt Options) ([]byte, error) {
-	type Data struct {
-		Story            model.Story
-		IncludeLayout    bool
-		ShowCommentsLink bool
+type StoryViewData struct {
+	Story            model.Story
+	IncludeLayout    bool
+	ShowCommentsLink bool
+}
+
+func (v StoryView) Data(params Params, headers Headers, opt Options) (ViewData[StoryViewData], error) {
+	result := ViewData[StoryViewData]{
+		Template: "story.gohtml",
 	}
 
 	story, err := v.Repo.GetStory(params.Get("id"))
 
 	if err != nil {
-		return nil, err
+		return result, err
 	}
 
-	return v.Templates.Render("story.gohtml", opt.Layout, Data{
+	result.Data = StoryViewData{
 		Story:            story,
 		IncludeLayout:    opt.IncludeLayout,
 		ShowCommentsLink: !opt.IncludeLayout && len(story.Kids) > 0,
-	})
+	}
+
+	result.HashKey = fmt.Sprintf(
+		"descendants:%d,score:%d",
+		story.Descendants,
+		story.Score,
+	)
+
+	return result, err
 }

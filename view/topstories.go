@@ -11,18 +11,18 @@ type TopStoriesView struct {
 	Repo      TopStoriesRepo
 }
 
-func (v TopStoriesView) Render(params Params, headers Headers, opt Options) ([]byte, error) {
-	type Data struct {
-		Ids []int
+type TopStoriesViewData struct {
+	Ids []int
+}
+
+func (v TopStoriesView) Data(params Params, headers Headers, opt Options) (ViewData[TopStoriesViewData], error) {
+	result := ViewData[TopStoriesViewData]{
+		Template: "topstories.gohtml",
 	}
 
 	ids, err := v.Repo.GetTopStoryIds()
 
-	if err != nil {
-		return nil, err
-	}
+	result.Data.Ids = ids
 
-	return v.Templates.Render("topstories.gohtml", opt.Layout, Data{
-		Ids: ids,
-	})
+	return result, err
 }
