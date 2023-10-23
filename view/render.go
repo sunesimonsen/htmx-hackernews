@@ -66,7 +66,18 @@ func WithView[T any](renderer templates.Renderer, view View[T]) httprouter.Handl
 				httpError.StatusCode,
 			)
 			return
-		} else if err != nil {
+		}
+
+		if errors.Is(err, repo.NotFoundError) {
+			http.Error(
+				w,
+				err.Error(),
+				http.StatusNotFound,
+			)
+			return
+		}
+
+		if err != nil {
 			fmt.Println(err)
 			http.Error(
 				w,
