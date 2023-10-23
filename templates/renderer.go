@@ -56,7 +56,6 @@ func NewRenderer() Renderer {
 		if err != nil {
 			panic(err)
 		}
-		fmt.Println(files)
 		templates[fileName] = template.Must(templates[fileName].ParseFS(templatesFS, files...))
 	}
 

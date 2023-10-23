@@ -62,6 +62,8 @@ func Logging(logger *slog.Logger) func(http.Handler) http.Handler {
 				"method", r.Method,
 				"path", r.URL.EscapedPath(),
 				"duration", time.Since(start),
+				"clientId", r.Header.Get("X-Client-Id"),
+				"requestId", r.Header.Get("X-Request-Id"),
 			)
 		}
 

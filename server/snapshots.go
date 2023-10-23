@@ -11,7 +11,7 @@ import (
 	"github.com/sunesimonsen/htmx-hackernews/repo"
 )
 
-func snapshotBody(t *testing.T, path string, upstreamPath string, responseObject any) {
+func snapshotResponse(t *testing.T, path string, upstreamPath string, responseObject any) {
 	t.Helper()
 
 	upstream := mock.NewServer(t, upstreamPath, responseObject)
@@ -24,5 +24,10 @@ func snapshotBody(t *testing.T, path string, upstreamPath string, responseObject
 
 	server.ServeHTTP(response, request)
 
-	snaps.MatchSnapshot(t, response.Body.String())
+	result := response.Result()
+	snaps.MatchSnapshot(t,
+		result.Header,
+		result.StatusCode,
+		response.Body.String(),
+	)
 }
