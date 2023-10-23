@@ -16,6 +16,15 @@ htmx.onLoad(function (content) {
   }
 });
 
+window.addEventListener("load", (event) => {
+  const clientId = ULID.ulid()
+
+  document.body.addEventListener('htmx:configRequest', function(evt) {
+    evt.detail.headers['X-Client-Id'] = clientId
+    evt.detail.headers['X-Request-Id'] = ULID.ulid()
+  });
+});
+
 const startAnimation = (element, animationClass) => {
   const stopAnimation = () => {
     element.classList.remove(animationClass);
