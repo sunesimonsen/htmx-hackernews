@@ -1,10 +1,12 @@
 package middleware
 
 import (
-	"log"
+	"fmt"
 	"net/http"
 	"runtime/debug"
 	"time"
+
+	"golang.org/x/exp/slog"
 )
 
 type responseWriter struct {
@@ -33,23 +35,29 @@ func (rw *responseWriter) WriteHeader(code int) {
 	return
 }
 
-func Logging(logger *log.Logger) func(http.Handler) http.Handler {
+func Logging(logger *slog.Logger) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		fn := func(w http.ResponseWriter, r *http.Request) {
 			defer func() {
-				if err := recover(); err != nil {
+				if recovered := recover(); recovered != nil {
+
+					err, ok := recovered.(error)
+
 					w.WriteHeader(http.StatusInternalServerError)
-					logger.Println(
-						"err", err,
-						"trace", debug.Stack(),
-					)
+					if ok {
+						logger.Error(err.Error())
+						fmt.Println(debug.Stack())
+					} else {
+						logger.Error("Unknown error")
+					}
 				}
 			}()
 
 			start := time.Now()
 			wrapped := wrapResponseWriter(w)
 			next.ServeHTTP(wrapped, r)
-			logger.Println(
+			logger.Info(
+				"request",
 				"status", wrapped.status,
 				"method", r.Method,
 				"path", r.URL.EscapedPath(),
