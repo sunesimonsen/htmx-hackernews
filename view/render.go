@@ -2,7 +2,6 @@ package view
 
 import (
 	"errors"
-	"fmt"
 	"net/http"
 
 	"github.com/hhsnopek/etag"
@@ -59,7 +58,6 @@ func WithView[T any](renderer templates.Renderer, view View[T]) httprouter.Handl
 
 		httpError := &repo.HttpError{}
 		if errors.As(err, httpError) {
-			fmt.Println(err)
 			http.Error(
 				w,
 				httpError.Error(),
@@ -78,7 +76,6 @@ func WithView[T any](renderer templates.Renderer, view View[T]) httprouter.Handl
 		}
 
 		if err != nil {
-			fmt.Println(err)
 			http.Error(
 				w,
 				http.StatusText(http.StatusInternalServerError),
