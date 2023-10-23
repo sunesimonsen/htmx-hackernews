@@ -1,9 +1,11 @@
 package server
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
+	"github.com/sunesimonsen/htmx-hackernews/middleware"
 	"github.com/sunesimonsen/htmx-hackernews/repo"
 	"github.com/sunesimonsen/htmx-hackernews/templates"
 )
@@ -15,7 +17,11 @@ type server struct {
 }
 
 func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	s.router.ServeHTTP(w, r)
+	loggingMiddleware := middleware.Logging(log.Default())
+
+	handler := loggingMiddleware(s.router)
+
+	handler.ServeHTTP(w, r)
 }
 
 type Config struct {
