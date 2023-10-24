@@ -6,7 +6,7 @@ import (
 	"runtime/debug"
 	"time"
 
-	"golang.org/x/exp/slog"
+	"log/slog"
 )
 
 type responseWriter struct {

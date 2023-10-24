@@ -7,7 +7,7 @@ import (
 	"github.com/sunesimonsen/htmx-hackernews/middleware"
 	"github.com/sunesimonsen/htmx-hackernews/repo"
 	"github.com/sunesimonsen/htmx-hackernews/templates"
-	"golang.org/x/exp/slog"
+	"log/slog"
 )
 
 type server struct {
