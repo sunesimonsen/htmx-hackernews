@@ -8,7 +8,7 @@ import (
 
 func TestGetStory(t *testing.T) {
 	t.Run("with a succesful response", func(t *testing.T) {
-		snapshotBody(t, "/story/37173339", "/v0/item/37173339.json", model.Story{
+		snapshotResponse(t, "/story/37173339", "/v0/item/37173339.json", model.Story{
 			By:          "ColinWright",
 			Descendants: 112,
 			Id:          37173339,

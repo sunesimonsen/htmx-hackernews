@@ -1,13 +1,13 @@
 package server
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/sunesimonsen/htmx-hackernews/middleware"
 	"github.com/sunesimonsen/htmx-hackernews/repo"
 	"github.com/sunesimonsen/htmx-hackernews/templates"
+	"golang.org/x/exp/slog"
 )
 
 type server struct {
@@ -17,7 +17,7 @@ type server struct {
 }
 
 func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	loggingMiddleware := middleware.Logging(log.Default())
+	loggingMiddleware := middleware.Logging(slog.Default())
 
 	handler := loggingMiddleware(s.router)
 

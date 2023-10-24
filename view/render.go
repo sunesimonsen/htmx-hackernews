@@ -2,6 +2,7 @@ package view
 
 import (
 	"errors"
+	"fmt"
 	"net/http"
 
 	"github.com/hhsnopek/etag"
@@ -88,13 +89,16 @@ func WithView[T any](renderer templates.Renderer, view View[T]) httprouter.Handl
 		w.Header().Set("Cache-Control", "max-age=0")
 
 		if data.HashKey != "" {
-			e := etag.Generate([]byte(data.HashKey), true)
+			hashKey := fmt.Sprintf("layout:%s,%s", options.Layout, data.HashKey)
+			e := etag.Generate([]byte(hashKey), true)
 
 			ifNoneMatch := r.Header.Get("If-None-Match")
 			if ifNoneMatch == e {
 				w.WriteHeader(http.StatusNotModified)
 				return
 			}
+
+			w.Header().Set("ETag", e)
 		}
 
 		// render template

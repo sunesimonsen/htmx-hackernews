@@ -1,5 +1,11 @@
 
 [TestGetStory/with_a_succesful_response - 1]
+http.Header{
+    "Cache-Control": {"max-age=0"},
+    "Content-Type":  {"text/html"},
+    "Etag":          {"W/\"20-f8f8bf3ad972b74867c77c69dcb2afed2e4a74e3\""},
+}
+int(200)
  
 <html lang="en">
   <head>
@@ -8,6 +14,76 @@
     <meta name="description" content="Hackernews example app in htmx and Go" lang="en"/>
     <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
     <script src="https://unpkg.com/htmx.org@1.9.4" integrity="sha384-zUfuhFKKZCbHTY6aRR46gxiqszMk5tcHjsVFxnUo8VMus4kHGVdIYVbOYYNlKmHV" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/ulid@2.3.0/dist/index.umd.js"></script>
+    <script src="/assets/scripts.js"></script>
+    <link rel="stylesheet" href="/assets/main.css">
+  </head>
+  <body>
+    <main>
+      
+<header class="topBar">
+  
+<a class="logo" href="/">
+    <img src="/assets/y18.gif" />
+    <span class="logo-caption">Hacker News</span>
+</a>
+
+</header>
+
+      <section class="content">
+        
+  <article class="story expanded">
+      <a href="https://www.sjoerdlangkemper.nl/2023/08/16/session-timeout/" target="_blank" title="Short session expiration does not help security" class="title">Short session expiration does not help security</a>
+      <footer>
+          <span>191 points by ColinWright</span>
+          <span data-timestamp>1692351932</span>
+          
+      </footer>
+      
+      <section class="comments">
+        
+        <article class="comment" hx-get="/comment/37175324?embed" hx-trigger="revealed" hx-swap="outerHTML">
+          <p><div class="skeleton" style="width: 60%"></div></p>
+          <p><div class="skeleton" style="width: 70%"></div></p>
+          <p><div class="skeleton" style="width: 50%"></div></p>
+          <footer><div class="skeleton" style="width: 40%"></div></footer>
+        </article>
+        
+        <article class="comment" hx-get="/comment/37176779?embed" hx-trigger="revealed" hx-swap="outerHTML">
+          <p><div class="skeleton" style="width: 60%"></div></p>
+          <p><div class="skeleton" style="width: 70%"></div></p>
+          <p><div class="skeleton" style="width: 50%"></div></p>
+          <footer><div class="skeleton" style="width: 40%"></div></footer>
+        </article>
+        
+        <article class="comment" hx-get="/comment/37175611?embed" hx-trigger="revealed" hx-swap="outerHTML">
+          <p><div class="skeleton" style="width: 60%"></div></p>
+          <p><div class="skeleton" style="width: 70%"></div></p>
+          <p><div class="skeleton" style="width: 50%"></div></p>
+          <footer><div class="skeleton" style="width: 40%"></div></footer>
+        </article>
+        
+      </section>
+      
+  </article>
+
+      </section>
+    </main>
+  </body>
+</html>
+ 
+---
+
+[TestGetStory/with_a_succesful_response - 2]
+ 
+<html lang="en">
+  <head>
+    <title>Hackernews</title>
+    <meta charset="UTF-8"/>
+    <meta name="description" content="Hackernews example app in htmx and Go" lang="en"/>
+    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+    <script src="https://unpkg.com/htmx.org@1.9.4" integrity="sha384-zUfuhFKKZCbHTY6aRR46gxiqszMk5tcHjsVFxnUo8VMus4kHGVdIYVbOYYNlKmHV" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/ulid@2.3.0/dist/index.umd.js"></script>
     <script src="/assets/scripts.js"></script>
     <link rel="stylesheet" href="/assets/main.css">
   </head>
