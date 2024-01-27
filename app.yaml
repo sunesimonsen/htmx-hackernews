@@ -1,1 +1,5 @@
 runtime: go121
+
+handlers:
+  - url: /assets
+    static_dir: server/assets
