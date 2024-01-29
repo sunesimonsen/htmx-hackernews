@@ -2,7 +2,7 @@
   <article class="story{{if .IncludeLayout}} expanded{{end}}">
       <a href="{{.Story.Url}}" target="_blank" title="{{.Story.Title}}" class="title">{{.Story.Title}}</a>
       <footer>
-          <span>{{.Story.Score}} points by {{.Story.By}}</span>
+          <span class="by-line">{{.Story.Score}} points by {{.Story.By}}</span>
           <span data-timestamp>{{.Story.Time}}</span>
           {{if .ShowCommentsLink}}
           <a href="/story/{{.Story.Id}}">

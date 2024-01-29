@@ -156,4 +156,12 @@ header {
   .stories {
     grid-gap: 0.4em;
   }
+
+  .by-line {
+    display: none;
+  }
+
+  .story.expanded .by-line {
+    display: inherit;
+  }
 }
