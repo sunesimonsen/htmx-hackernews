@@ -1,6 +1,6 @@
 {{define "content"}}
   <article class="comment{{if .IncludeLayout}} expanded{{end}}">
-      {{.Comment.Text}}
+      <div class="comment-body">{{.Comment.Text}}</div>
       <footer>
           <span>{{.Comment.By}}</span>
           <span data-timestamp>{{.Comment.Time}}</span>

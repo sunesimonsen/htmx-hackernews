@@ -2,6 +2,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  line-height: 1.5em;
 }
 
 body {
@@ -14,14 +15,14 @@ header {
   align-items: center;
   background: rgb(255, 102, 0);
   color: white;
-  height: 38px;
   position: sticky;
-  top: 0px;
+  top: 0;
   z-index: 1;
+  padding: 0.1em;
 }
 
 .content {
-  padding: 20px 0;
+  padding: 1.3em 0;
   width: 90vw;
   max-width: 800px;
   margin: 0 auto;
@@ -29,11 +30,10 @@ header {
 
 .story {
   position: relative;
-  line-height: 24px;
   list-style-type: none;
   background: white;
-  padding: 20px;
-  border-radius: 4px;
+  padding: 1.3em;
+  border-radius: 0.2em;
   overflow: hidden;
 }
 
@@ -41,28 +41,26 @@ header {
   display: block;
   font-weight: normal;
   margin-top: 0;
-  font-size: 1.5em;
-  line-height: 1.5em;
+  font-size: 1.6em;
   color: black;
   text-decoration: none;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  margin-bottom: 8px;
+  margin-bottom: 0.3em;
 }
 
 .comments > .comment {
   border-top: thin solid #ccc;
   margin-top: 1em;
   padding-top: 1em;
-  font-size: smaller;
   padding-inline-start: 0.5em;
 }
 
 .comment.expanded {
   background: white;
-  padding: 20px;
-  border-radius: 4px;
+  padding: 1.3em;
+  border-radius: 0.2em;
 }
 
 .comment > footer {
@@ -73,14 +71,14 @@ header {
 .comment > footer {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 1.3em;
   color: grey;
 }
 
 .stories {
   box-sizing: border-box;
   display: grid;
-  grid-gap: 8px;
+  grid-gap: 0.3em;
   padding: 0;
   margin: 0;
 }
@@ -90,7 +88,7 @@ header {
   align-items: center;
   color: white;
   text-decoration: none;
-  padding: 8px 20px;
+  padding: 0.3em 1.3em;
 }
 
 .logo:hover {
@@ -103,35 +101,10 @@ header {
 
 .logo > img {
   border: thin solid white;
-  width: 20px;
-  height: 20px;
 }
 
 .logo > .logo-caption {
-  margin: 0 10px;
-}
-
-.reload {
-  display: block;
-  position: absolute;
-  top: 0;
-  right: 0;
-  background: none;
-  color: white;
-  border: none;
-  height: 36px;
-  width: 36px;
-  cursor: pointer;
-  outline: none;
-  padding: 10px;
-}
-
-.reload:hover {
-  background: rgb(222 90 2);
-}
-
-.reload:active {
-  background: rgb(195 78 0);
+  margin: 0 0.5em;
 }
 
 @keyframes spin-animation {
@@ -147,11 +120,40 @@ header {
 .skeleton {
   display: inline-block;
   position: relative;
-  border-radius: 4px;
+  border-radius: 0.2em;
   width: 100%;
   height: 0.9em;
   margin-top: 0.3em;
   margin-bottom: 0.3em;
   overflow: hidden;
   background-color: rgba(47, 57, 65, 0.1);
+}
+
+@media only screen and (width <= 1000px) {
+  .content {
+    width: 95vw;
+    max-width: inherit;
+  }
+
+  body {
+    font-size: 2em;
+  }
+
+  .comment-body {
+    font-size: 0.6em;
+  }
+
+  .logo {
+    font-size: 1.4em;
+    padding: 0.3em 0.8em;
+  }
+
+  .logo > img {
+    height: 1em;
+    width: 1em;
+  }
+
+  .stories {
+    grid-gap: 0.4em;
+  }
 }
