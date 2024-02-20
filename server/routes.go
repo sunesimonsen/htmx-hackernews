@@ -7,25 +7,25 @@ import (
 )
 
 func (s *server) setupRoutes() {
-	s.router.GET("/",
+	s.router.Handle("GET /{$}",
 		view.WithView(s.templates, "main", view.IndexView{}),
 	)
-	s.router.GET("/story/:id",
+	s.router.Handle("GET /story/{id}",
 		view.WithView(s.templates, "main", view.StoryWithCommentsView{Repo: s.repo}),
 	)
-	s.router.GET("/comment/:id",
+	s.router.Handle("GET /comment/{id}",
 		view.WithView(s.templates, "main", view.CommentWithAnswersView{Repo: s.repo}),
 	)
 
-	s.router.GET("/parts/topstories",
+	s.router.Handle("GET /parts/topstories",
 		view.WithView(s.templates, "part", view.TopStoriesView{Repo: s.repo}),
 	)
-	s.router.GET("/parts/story/:id",
+	s.router.Handle("GET /parts/story/{id}",
 		view.WithView(s.templates, "part", view.StoryView{Repo: s.repo}),
 	)
-	s.router.GET("/parts/comment/:id",
+	s.router.Handle("GET /parts/comment/{id}",
 		view.WithView(s.templates, "part", view.CommentView{Repo: s.repo}),
 	)
 
-	s.router.ServeFiles("/assets/*filepath", http.Dir("server/assets"))
+	s.router.Handle("GET /assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("./server/assets"))))
 }

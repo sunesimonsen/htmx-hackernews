@@ -3,16 +3,16 @@ package server
 import (
 	"net/http"
 
-	"github.com/julienschmidt/httprouter"
+	"log/slog"
+
 	"github.com/sunesimonsen/htmx-hackernews/middleware"
 	"github.com/sunesimonsen/htmx-hackernews/repo"
 	"github.com/sunesimonsen/htmx-hackernews/templates"
-	"log/slog"
 )
 
 type server struct {
 	templates templates.Renderer
-	router    *httprouter.Router
+	router    *http.ServeMux
 	repo      repo.Host
 }
 
@@ -29,7 +29,7 @@ type Config struct {
 }
 
 func NewServer(config Config) (*server, error) {
-	router := httprouter.New()
+	router := http.NewServeMux()
 
 	s := &server{router: router}
 

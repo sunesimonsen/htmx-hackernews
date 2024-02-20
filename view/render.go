@@ -6,7 +6,6 @@ import (
 	"net/http"
 
 	"github.com/hhsnopek/etag"
-	"github.com/julienschmidt/httprouter"
 	"github.com/sunesimonsen/htmx-hackernews/repo"
 	"github.com/sunesimonsen/htmx-hackernews/templates"
 )
@@ -20,11 +19,11 @@ type Params interface {
 }
 
 type paramsWrapper struct {
-	httprouter.Params
+	req *http.Request
 }
 
 func (ps paramsWrapper) Get(name string) string {
-	return ps.ByName(name)
+	return ps.req.PathValue(name)
 }
 
 type ViewData[T any] struct {
@@ -37,9 +36,9 @@ type View[T any] interface {
 	Data(params Params, headers Headers) (ViewData[T], error)
 }
 
-func WithView[T any](renderer templates.Renderer, layout string, view View[T]) httprouter.Handle {
-	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-		data, err := view.Data(paramsWrapper{ps}, r.Header)
+func WithView[T any](renderer templates.Renderer, layout string, view View[T]) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		data, err := view.Data(paramsWrapper{req: r}, r.Header)
 
 		httpError := &repo.HttpError{}
 		if errors.As(err, httpError) {
