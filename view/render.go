@@ -44,11 +44,11 @@ type View[T any] interface {
 
 func WithView[T any](renderer templates.Renderer, layout string, view View[T]) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-		includeLayout := layout != "content"
+		includeLayout := layout != "part"
 
 		options := Options{
 			IncludeLayout: includeLayout,
-			Layout:        "content",
+			Layout:        "part",
 		}
 
 		if includeLayout {

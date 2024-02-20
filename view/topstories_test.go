@@ -16,7 +16,7 @@ func TestTopStoriesView(t *testing.T) {
 		_, err := view.Data(
 			mock.Params{},
 			mock.Headers{},
-			Options{Layout: "content"},
+			Options{Layout: "part"},
 		)
 		assert.Equal(t, err, testerr)
 	})
@@ -29,7 +29,7 @@ func TestTopStoriesView(t *testing.T) {
 		data, err := view.Data(
 			mock.Params{},
 			mock.Headers{},
-			Options{Layout: "content"},
+			Options{Layout: "part"},
 		)
 
 		assert.NoError(t, err)

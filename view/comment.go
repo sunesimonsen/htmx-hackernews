@@ -41,3 +41,29 @@ func (v CommentView) Data(params Params, headers Headers, opt Options) (ViewData
 
 	return result, err
 }
+
+type CommentWithAnswersView struct {
+	Repo CommentRepo
+}
+
+func (v CommentWithAnswersView) Data(params Params, headers Headers, opt Options) (ViewData[CommentViewData], error) {
+	result := ViewData[CommentViewData]{
+		Template: "comment-with-answers.gohtml",
+	}
+
+	comment, err := v.Repo.GetComment(params.Get("id"))
+
+	if err != nil {
+		return result, err
+	}
+
+	result.Data = CommentViewData{
+		Comment:          comment,
+		IncludeLayout:    opt.IncludeLayout,
+		ShowCommentsLink: !opt.IncludeLayout && comment.Answers > 0,
+	}
+
+	result.HashKey = fmt.Sprintf("answers:%d", comment.Answers)
+
+	return result, err
+}

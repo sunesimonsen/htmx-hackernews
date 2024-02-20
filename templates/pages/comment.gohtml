@@ -1,5 +1,5 @@
-{{define "content"}}
-  <article class="comment{{if .IncludeLayout}} expanded{{end}}">
+{{define "part"}}
+  <article class="comment">
       <div class="comment-body">{{.Comment.Text}}</div>
       <footer>
           <span>{{.Comment.By}}</span>
@@ -10,17 +10,5 @@
           </a>
           {{end}}
       </footer>
-      {{if .IncludeLayout}}
-      <section class="comments">
-        {{range $id := .Comment.Kids}}
-        <article class="comment" hx-get="/parts/comment/{{$id}}" hx-trigger="revealed" hx-swap="outerHTML">
-          <p><div class="skeleton" style="width: 60%"></div></p>
-          <p><div class="skeleton" style="width: 70%"></div></p>
-          <p><div class="skeleton" style="width: 50%"></div></p>
-          <footer><div class="skeleton" style="width: 40%"></div></footer>
-        </article>
-        {{end}}
-      </section>
-      {{end}}
   </article>
 {{end}}

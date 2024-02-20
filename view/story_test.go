@@ -17,7 +17,7 @@ func TestStoryView(t *testing.T) {
 		_, err := view.Data(
 			mock.Params{"id": "42"},
 			mock.Headers{},
-			Options{Layout: "content"},
+			Options{Layout: "part"},
 		)
 		assert.Equal(t, err, testerr)
 	})
@@ -39,7 +39,7 @@ func TestStoryView(t *testing.T) {
 		data, err := view.Data(
 			mock.Params{"id": "37173339"},
 			mock.Headers{"Hx-Request": "true"},
-			Options{Layout: "content"},
+			Options{Layout: "part"},
 		)
 
 		assert.NoError(t, err)
