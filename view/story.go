@@ -45,3 +45,33 @@ func (v StoryView) Data(params Params, headers Headers, opt Options) (ViewData[S
 
 	return result, err
 }
+
+type StoryWithCommentsView struct {
+	Repo StoryRepo
+}
+
+func (v StoryWithCommentsView) Data(params Params, headers Headers, opt Options) (ViewData[StoryViewData], error) {
+	result := ViewData[StoryViewData]{
+		Template: "story-with-comments.gohtml",
+	}
+
+	story, err := v.Repo.GetStory(params.Get("id"))
+
+	if err != nil {
+		return result, err
+	}
+
+	result.Data = StoryViewData{
+		Story:            story,
+		IncludeLayout:    opt.IncludeLayout,
+		ShowCommentsLink: !opt.IncludeLayout && len(story.Kids) > 0,
+	}
+
+	result.HashKey = fmt.Sprintf(
+		"descendants:%d,score:%d",
+		story.Descendants,
+		story.Score,
+	)
+
+	return result, err
+}
