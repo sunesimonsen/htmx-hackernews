@@ -14,14 +14,8 @@ type StoryView struct {
 	Repo StoryRepo
 }
 
-type StoryViewData struct {
-	Story            model.Story
-	IncludeLayout    bool
-	ShowCommentsLink bool
-}
-
-func (v StoryView) Data(params Params, headers Headers, opt Options) (ViewData[StoryViewData], error) {
-	result := ViewData[StoryViewData]{
+func (v StoryView) Data(params Params, headers Headers, opt Options) (ViewData[model.Story], error) {
+	result := ViewData[model.Story]{
 		Template: "story.gohtml",
 	}
 
@@ -31,11 +25,7 @@ func (v StoryView) Data(params Params, headers Headers, opt Options) (ViewData[S
 		return result, err
 	}
 
-	result.Data = StoryViewData{
-		Story:            story,
-		IncludeLayout:    opt.IncludeLayout,
-		ShowCommentsLink: !opt.IncludeLayout && len(story.Kids) > 0,
-	}
+	result.Data = story
 
 	result.HashKey = fmt.Sprintf(
 		"descendants:%d,score:%d",
@@ -50,8 +40,8 @@ type StoryWithCommentsView struct {
 	Repo StoryRepo
 }
 
-func (v StoryWithCommentsView) Data(params Params, headers Headers, opt Options) (ViewData[StoryViewData], error) {
-	result := ViewData[StoryViewData]{
+func (v StoryWithCommentsView) Data(params Params, headers Headers, opt Options) (ViewData[model.Story], error) {
+	result := ViewData[model.Story]{
 		Template: "story-with-comments.gohtml",
 	}
 
@@ -61,11 +51,7 @@ func (v StoryWithCommentsView) Data(params Params, headers Headers, opt Options)
 		return result, err
 	}
 
-	result.Data = StoryViewData{
-		Story:            story,
-		IncludeLayout:    opt.IncludeLayout,
-		ShowCommentsLink: !opt.IncludeLayout && len(story.Kids) > 0,
-	}
+	result.Data = story
 
 	result.HashKey = fmt.Sprintf(
 		"descendants:%d,score:%d",

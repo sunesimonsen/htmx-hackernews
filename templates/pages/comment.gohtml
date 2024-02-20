@@ -1,12 +1,12 @@
 {{define "part"}}
   <article class="comment">
-      <div class="comment-body">{{.Comment.Text}}</div>
+      <div class="comment-body">{{.Text}}</div>
       <footer>
-          <span>{{.Comment.By}}</span>
-          <span data-timestamp>{{.Comment.Time}}</span>
-          {{if .ShowCommentsLink}}
-          <a href="/comment/{{.Comment.Id}}">
-            {{.Comment.Answers}} answers
+          <span>{{.By}}</span>
+          <span data-timestamp>{{.Time}}</span>
+          {{if .Answers}}
+          <a href="/comment/{{.Id}}">
+            {{.Answers}} answers
           </a>
           {{end}}
       </footer>
