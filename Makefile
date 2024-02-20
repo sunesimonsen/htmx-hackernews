@@ -4,6 +4,8 @@ deploy:
 browse:
 	gcloud app browse
 
+run:
+	go run .
 test:
 	go test ./...
 
