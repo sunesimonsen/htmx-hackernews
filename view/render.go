@@ -42,9 +42,9 @@ type View[T any] interface {
 	Data(params Params, headers Headers, opt Options) (ViewData[T], error)
 }
 
-func WithView[T any](renderer templates.Renderer, view View[T]) httprouter.Handle {
+func WithView[T any](renderer templates.Renderer, layout string, view View[T]) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-		includeLayout := r.Header.Get("Hx-Request") == ""
+		includeLayout := layout != "content"
 
 		options := Options{
 			IncludeLayout: includeLayout,
@@ -52,7 +52,7 @@ func WithView[T any](renderer templates.Renderer, view View[T]) httprouter.Handl
 		}
 
 		if includeLayout {
-			options.Layout = "main"
+			options.Layout = layout
 		}
 
 		data, err := view.Data(paramsWrapper{ps}, r.Header, options)

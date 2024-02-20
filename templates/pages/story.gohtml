@@ -13,7 +13,7 @@
       {{if .IncludeLayout}}
       <section class="comments">
         {{range $id := .Story.Kids}}
-        <article class="comment" hx-get="/comment/{{$id}}?embed" hx-trigger="revealed" hx-swap="outerHTML">
+        <article class="comment" hx-get="/parts/comment/{{$id}}" hx-trigger="revealed" hx-swap="outerHTML">
           <p><div class="skeleton" style="width: 60%"></div></p>
           <p><div class="skeleton" style="width: 70%"></div></p>
           <p><div class="skeleton" style="width: 50%"></div></p>
