@@ -1,4 +1,4 @@
-runtime: go122
+runtime: go121
 
 handlers:
   - url: /assets
