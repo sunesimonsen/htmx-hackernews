@@ -15,7 +15,7 @@ type TopStoriesViewData struct {
 	Ids []int
 }
 
-func (v TopStoriesView) Data(params Params, headers Headers, opt Options) (ViewData[TopStoriesViewData], error) {
+func (v TopStoriesView) Data(params Params, headers Headers) (ViewData[TopStoriesViewData], error) {
 	result := ViewData[TopStoriesViewData]{
 		Template: "topstories.gohtml",
 	}

@@ -14,7 +14,6 @@ func TestIndexView(t *testing.T) {
 		data, err := view.Data(
 			mock.Params{},
 			mock.Headers{},
-			Options{Layout: "content"},
 		)
 
 		assert.NoError(t, err)

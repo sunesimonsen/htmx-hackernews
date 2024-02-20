@@ -1,26 +1,14 @@
-{{define "content"}}
-  <article class="comment{{if .IncludeLayout}} expanded{{end}}">
-      <div class="comment-body">{{.Comment.Text}}</div>
+{{define "part"}}
+  <article class="comment">
+      <div class="comment-body">{{.Text}}</div>
       <footer>
-          <span>{{.Comment.By}}</span>
-          <span data-timestamp>{{.Comment.Time}}</span>
-          {{if .ShowCommentsLink}}
-          <a href="/comment/{{.Comment.Id}}">
-            {{.Comment.Answers}} answers
+          <span>{{.By}}</span>
+          <span data-timestamp>{{.Time}}</span>
+          {{if .Answers}}
+          <a href="/comment/{{.Id}}">
+            {{.Answers}} answers
           </a>
           {{end}}
       </footer>
-      {{if .IncludeLayout}}
-      <section class="comments">
-        {{range $id := .Comment.Kids}}
-        <article class="comment" hx-get="/comment/{{$id}}" hx-trigger="revealed" hx-swap="outerHTML">
-          <p><div class="skeleton" style="width: 60%"></div></p>
-          <p><div class="skeleton" style="width: 70%"></div></p>
-          <p><div class="skeleton" style="width: 50%"></div></p>
-          <footer><div class="skeleton" style="width: 40%"></div></footer>
-        </article>
-        {{end}}
-      </section>
-      {{end}}
   </article>
 {{end}}

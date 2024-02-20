@@ -18,8 +18,6 @@ type Renderer struct {
 	templates map[string]*template.Template
 }
 
-var mainTmpl = `{{define "main" }} {{ template "base" . }} {{ end }}`
-
 func NewRenderer() Renderer {
 	layoutFiles, err := fs.Glob(templatesFS, "layouts/*.gohtml")
 	if err != nil {
@@ -36,12 +34,6 @@ func NewRenderer() Renderer {
 		panic(err)
 	}
 
-	mainTemplate := template.New("main")
-	mainTemplate, err = mainTemplate.Parse(mainTmpl)
-	if err != nil {
-		panic(err)
-	}
-
 	templates := map[string]*template.Template{}
 
 	for _, file := range pagesFiles {
@@ -52,11 +44,7 @@ func NewRenderer() Renderer {
 		files = append(files, layoutFiles...)
 		files = append(files, file)
 
-		templates[fileName], err = mainTemplate.Clone()
-		if err != nil {
-			panic(err)
-		}
-		templates[fileName] = template.Must(templates[fileName].ParseFS(templatesFS, files...))
+		templates[fileName] = template.Must(template.ParseFS(templatesFS, files...))
 	}
 
 	return Renderer{templates: templates}
