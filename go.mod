@@ -2,6 +2,8 @@ module github.com/sunesimonsen/htmx-hackernews
 
 go 1.21
 
+toolchain go1.21.0
+
 require (
 	github.com/alecthomas/assert/v2 v2.3.0
 	github.com/gkampitakis/go-snaps v0.4.8
@@ -22,5 +24,4 @@ require (
 	github.com/tidwall/pretty v1.2.1 // indirect
 	github.com/tidwall/sjson v1.2.5 // indirect
 	github.com/tj/assert v0.0.3 // indirect
-	golang.org/x/exp v0.0.0-20231006140011-7918f672742d
 )
