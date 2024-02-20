@@ -6,7 +6,7 @@ http.Header{
     "Etag":          {"W/\"20-892dc341613dc7c7038151f9d4a83f9b10ef1022\""},
 }
 int(200)
- 
+
 <html lang="en">
   <head>
     <title>Hackernews</title>
@@ -37,20 +37,17 @@ int(200)
       <footer>
           <span>CapitalistCartr</span>
           <span data-timestamp>1692369360</span>
-          
       </footer>
-      
       <section class="comments">
         
       </section>
-      
   </article>
 
       </section>
     </main>
   </body>
 </html>
- 
+
 ---
 
 [TestGetComment/with_a_succesful_response - 2]

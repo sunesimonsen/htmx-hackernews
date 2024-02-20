@@ -27,11 +27,6 @@ func (ps paramsWrapper) Get(name string) string {
 	return ps.ByName(name)
 }
 
-type Options struct {
-	IncludeLayout bool
-	Layout        string
-}
-
 type ViewData[T any] struct {
 	Template string
 	HashKey  string
@@ -39,23 +34,12 @@ type ViewData[T any] struct {
 }
 
 type View[T any] interface {
-	Data(params Params, headers Headers, opt Options) (ViewData[T], error)
+	Data(params Params, headers Headers) (ViewData[T], error)
 }
 
 func WithView[T any](renderer templates.Renderer, layout string, view View[T]) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-		includeLayout := layout != "part"
-
-		options := Options{
-			IncludeLayout: includeLayout,
-			Layout:        "part",
-		}
-
-		if includeLayout {
-			options.Layout = layout
-		}
-
-		data, err := view.Data(paramsWrapper{ps}, r.Header, options)
+		data, err := view.Data(paramsWrapper{ps}, r.Header)
 
 		httpError := &repo.HttpError{}
 		if errors.As(err, httpError) {
@@ -89,7 +73,7 @@ func WithView[T any](renderer templates.Renderer, layout string, view View[T]) h
 		w.Header().Set("Cache-Control", "max-age=0")
 
 		if data.HashKey != "" {
-			hashKey := fmt.Sprintf("layout:%s,%s", options.Layout, data.HashKey)
+			hashKey := fmt.Sprintf("layout:%s,%s", layout, data.HashKey)
 			e := etag.Generate([]byte(hashKey), true)
 
 			ifNoneMatch := r.Header.Get("If-None-Match")
@@ -102,6 +86,6 @@ func WithView[T any](renderer templates.Renderer, layout string, view View[T]) h
 		}
 
 		// render template
-		renderer.Render(w, data.Template, options.Layout, data.Data)
+		renderer.Render(w, data.Template, layout, data.Data)
 	}
 }

@@ -17,7 +17,6 @@ func TestStoryView(t *testing.T) {
 		_, err := view.Data(
 			mock.Params{"id": "42"},
 			mock.Headers{},
-			Options{Layout: "part"},
 		)
 		assert.Equal(t, err, testerr)
 	})
@@ -39,17 +38,13 @@ func TestStoryView(t *testing.T) {
 		data, err := view.Data(
 			mock.Params{"id": "37173339"},
 			mock.Headers{"Hx-Request": "true"},
-			Options{Layout: "part"},
 		)
 
 		assert.NoError(t, err)
-		assert.Equal(t, data, ViewData[StoryViewData]{
+		assert.Equal(t, data, ViewData[model.Story]{
 			Template: "story.gohtml",
 			HashKey:  "descendants:112,score:191",
-			Data: StoryViewData{
-				Story:            story,
-				ShowCommentsLink: true,
-			},
+			Data:     story,
 		})
 	})
 }

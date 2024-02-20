@@ -14,7 +14,7 @@ type StoryView struct {
 	Repo StoryRepo
 }
 
-func (v StoryView) Data(params Params, headers Headers, opt Options) (ViewData[model.Story], error) {
+func (v StoryView) Data(params Params, headers Headers) (ViewData[model.Story], error) {
 	result := ViewData[model.Story]{
 		Template: "story.gohtml",
 	}
@@ -40,7 +40,7 @@ type StoryWithCommentsView struct {
 	Repo StoryRepo
 }
 
-func (v StoryWithCommentsView) Data(params Params, headers Headers, opt Options) (ViewData[model.Story], error) {
+func (v StoryWithCommentsView) Data(params Params, headers Headers) (ViewData[model.Story], error) {
 	result := ViewData[model.Story]{
 		Template: "story-with-comments.gohtml",
 	}

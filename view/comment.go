@@ -14,7 +14,7 @@ type CommentView struct {
 	Repo CommentRepo
 }
 
-func (v CommentView) Data(params Params, headers Headers, opt Options) (ViewData[model.Comment], error) {
+func (v CommentView) Data(params Params, headers Headers) (ViewData[model.Comment], error) {
 	result := ViewData[model.Comment]{
 		Template: "comment.gohtml",
 	}
@@ -36,7 +36,7 @@ type CommentWithAnswersView struct {
 	Repo CommentRepo
 }
 
-func (v CommentWithAnswersView) Data(params Params, headers Headers, opt Options) (ViewData[model.Comment], error) {
+func (v CommentWithAnswersView) Data(params Params, headers Headers) (ViewData[model.Comment], error) {
 	result := ViewData[model.Comment]{
 		Template: "comment-with-answers.gohtml",
 	}

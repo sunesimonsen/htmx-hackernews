@@ -17,7 +17,6 @@ func TestCommentView(t *testing.T) {
 		_, err := view.Data(
 			mock.Params{"id": "42"},
 			mock.Headers{},
-			Options{Layout: "part"},
 		)
 		assert.Equal(t, err, testerr)
 	})
@@ -37,17 +36,13 @@ func TestCommentView(t *testing.T) {
 		data, err := view.Data(
 			mock.Params{"id": "37176230"},
 			mock.Headers{"Hx-Request": "true"},
-			Options{Layout: "part"},
 		)
 
 		assert.NoError(t, err)
-		assert.Equal(t, data, ViewData[CommentViewData]{
+		assert.Equal(t, data, ViewData[model.Comment]{
 			Template: "comment.gohtml",
 			HashKey:  "answers:42",
-			Data: CommentViewData{
-				Comment:          comment,
-				ShowCommentsLink: true,
-			},
+			Data:     comment,
 		})
 	})
 }
