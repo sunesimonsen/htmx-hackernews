@@ -37,19 +37,9 @@ type CommentWithAnswersView struct {
 }
 
 func (v CommentWithAnswersView) Data(params Params, headers Headers) (ViewData[model.Comment], error) {
-	result := ViewData[model.Comment]{
-		Template: "comment-with-answers.gohtml",
-	}
+	result, err := CommentView{Repo: v.Repo}.Data(params, headers)
 
-	comment, err := v.Repo.GetComment(params.Get("id"))
-
-	if err != nil {
-		return result, err
-	}
-
-	result.Data = comment
-
-	result.HashKey = fmt.Sprintf("answers:%d", comment.Answers)
+	result.Template = "comment-with-answers.gohtml"
 
 	return result, err
 }

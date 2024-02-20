@@ -41,23 +41,9 @@ type StoryWithCommentsView struct {
 }
 
 func (v StoryWithCommentsView) Data(params Params, headers Headers) (ViewData[model.Story], error) {
-	result := ViewData[model.Story]{
-		Template: "story-with-comments.gohtml",
-	}
+	result, err := StoryView{Repo: v.Repo}.Data(params, headers)
 
-	story, err := v.Repo.GetStory(params.Get("id"))
-
-	if err != nil {
-		return result, err
-	}
-
-	result.Data = story
-
-	result.HashKey = fmt.Sprintf(
-		"descendants:%d,score:%d",
-		story.Descendants,
-		story.Score,
-	)
+	result.Template = "story-with-comments.gohtml"
 
 	return result, err
 }
