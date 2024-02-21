@@ -1,9 +1,9 @@
 
-[TestComment/GET_/comment/37176230_with_a_succesful_response - 1]
+[TestComment/snapshot_GET_/comment/37176230_with_a_succesful_response - 1]
 http.Header{
     "Cache-Control": {"max-age=0"},
     "Content-Type":  {"text/html"},
-    "Etag":          {"W/\"20-621f8149c61fe1bfd907d26a856434cf3ce1678c\""},
+    "Etag":          {"W/\"20-ef36c2a68197b48e8a131a230b90491dd89747c6\""},
 }
 int(200)
 <title>
@@ -42,6 +42,54 @@ int(200)
     </span>
    </footer>
    <section class="comments">
+    <article class="comment" hx-get="/parts/comment/42" hx-trigger="revealed" hx-swap="outerHTML">
+     <p>
+     </p>
+     <div class="skeleton" style="width: 60%">
+     </div>
+     <p>
+     </p>
+     <p>
+     </p>
+     <div class="skeleton" style="width: 70%">
+     </div>
+     <p>
+     </p>
+     <p>
+     </p>
+     <div class="skeleton" style="width: 50%">
+     </div>
+     <p>
+     </p>
+     <footer>
+      <div class="skeleton" style="width: 40%">
+      </div>
+     </footer>
+    </article>
+    <article class="comment" hx-get="/parts/comment/24" hx-trigger="revealed" hx-swap="outerHTML">
+     <p>
+     </p>
+     <div class="skeleton" style="width: 60%">
+     </div>
+     <p>
+     </p>
+     <p>
+     </p>
+     <div class="skeleton" style="width: 70%">
+     </div>
+     <p>
+     </p>
+     <p>
+     </p>
+     <div class="skeleton" style="width: 50%">
+     </div>
+     <p>
+     </p>
+     <footer>
+      <div class="skeleton" style="width: 40%">
+      </div>
+     </footer>
+    </article>
    </section>
   </article>
  </section>
@@ -49,11 +97,11 @@ int(200)
 
 ---
 
-[TestComment/GET_/parts/comment/37176230_with_a_succesful_response - 1]
+[TestComment/snapshot_GET_/parts/comment/37176230_with_a_succesful_response - 1]
 http.Header{
     "Cache-Control": {"max-age=0"},
     "Content-Type":  {"text/html"},
-    "Etag":          {"W/\"20-621f8149c61fe1bfd907d26a856434cf3ce1678c\""},
+    "Etag":          {"W/\"20-ef36c2a68197b48e8a131a230b90491dd89747c6\""},
 }
 int(200)
 <article class="comment expanded">
@@ -67,6 +115,9 @@ int(200)
   <span data-timestamp="">
    1692369360
   </span>
+  <a href="/comment/37176230">
+   2 answers
+  </a>
  </footer>
 </article>
 

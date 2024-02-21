@@ -1,5 +1,5 @@
 
-[TestStory/GET_/story/37173339_with_a_succesful_response - 1]
+[TestStory/snapshot_GET_/story/37173339_with_a_succesful_response - 1]
 http.Header{
     "Cache-Control": {"max-age=0"},
     "Content-Type":  {"text/html"},
@@ -121,7 +121,7 @@ int(200)
 
 ---
 
-[TestStory/GET_/parts/story/37173339_with_a_succesful_response - 1]
+[TestStory/snapshot_GET_/parts/story/37173339_with_a_succesful_response - 1]
 http.Header{
     "Cache-Control": {"max-age=0"},
     "Content-Type":  {"text/html"},

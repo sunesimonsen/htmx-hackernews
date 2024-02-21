@@ -18,11 +18,18 @@ func TestStory(t *testing.T) {
 		Url:         "https://www.sjoerdlangkemper.nl/2023/08/16/session-timeout/",
 	}
 
-	t.Run("GET /story/37173339 with a succesful response", func(t *testing.T) {
-		snapshotResponse(t, "/story/37173339", "/v0/item/37173339.json", story)
+	t.Run("snapshot GET /story/37173339 with a succesful response", func(t *testing.T) {
+		snapshotRequest(t, "/story/37173339", "/v0/item/37173339.json", story)
+	})
+
+	t.Run("snapshot GET /parts/story/37173339 with a succesful response", func(t *testing.T) {
+		snapshotRequest(t, "/parts/story/37173339", "/v0/item/37173339.json", story)
 	})
 
 	t.Run("GET /parts/story/37173339 with a succesful response", func(t *testing.T) {
-		snapshotResponse(t, "/parts/story/37173339", "/v0/item/37173339.json", story)
+		response := renderResponse(t, "/parts/story/37173339", "/v0/item/37173339.json", story)
+		doc := newDocument(response)
+		assertSelectedText(t, doc, ".title", story.Title)
+		assertSelectedText(t, doc, ".by-line", "%d points by %s", story.Score, story.By)
 	})
 }
