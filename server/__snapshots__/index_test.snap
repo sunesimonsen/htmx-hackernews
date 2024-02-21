@@ -1,0 +1,87 @@
+
+[TestIndex/GET_/_with_a_succesful_response - 1]
+http.Header{
+    "Cache-Control": {"max-age=0"},
+    "Content-Type":  {"text/html"},
+    "Etag":          {"W/\"20-c2df9b932637fe9d32a0f16da1c11873398f873d\""},
+}
+int(200)
+<title>
+ Hackernews
+</title>
+<meta charset="UTF-8">
+<meta name="description" content="Hackernews example app in htmx and Go" lang="en">
+<link rel="stylesheet" href="/assets/main.css">
+<link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+<script src="https://unpkg.com/htmx.org@1.9.4" integrity="sha384-zUfuhFKKZCbHTY6aRR46gxiqszMk5tcHjsVFxnUo8VMus4kHGVdIYVbOYYNlKmHV" crossorigin="anonymous">
+</script>
+<script src="https://unpkg.com/ulid@2.3.0/dist/index.umd.js">
+</script>
+<script src="/assets/scripts.js">
+</script>
+<main>
+ <header class="topBar">
+  <a class="logo" href="/">
+   <img src="/assets/y18.gif">
+   <span class="logo-caption">
+    Hacker News
+   </span>
+  </a>
+ </header>
+ <section class="content">
+  <div class="stories" hx-get="/parts/topstories" hx-trigger="load">
+   <article class="htmx-indicator story placeholder">
+    <a class="title">
+     <div class="skeleton" style="width: 60%">
+     </div>
+    </a>
+    <footer>
+     <div class="skeleton" style="width: 40%">
+     </div>
+    </footer>
+   </article>
+   <article class="htmx-indicator story placeholder">
+    <a class="title">
+     <div class="skeleton" style="width: 60%">
+     </div>
+    </a>
+    <footer>
+     <div class="skeleton" style="width: 40%">
+     </div>
+    </footer>
+   </article>
+   <article class="htmx-indicator story placeholder">
+    <a class="title">
+     <div class="skeleton" style="width: 60%">
+     </div>
+    </a>
+    <footer>
+     <div class="skeleton" style="width: 40%">
+     </div>
+    </footer>
+   </article>
+   <article class="htmx-indicator story placeholder">
+    <a class="title">
+     <div class="skeleton" style="width: 60%">
+     </div>
+    </a>
+    <footer>
+     <div class="skeleton" style="width: 40%">
+     </div>
+    </footer>
+   </article>
+   <article class="htmx-indicator story placeholder">
+    <a class="title">
+     <div class="skeleton" style="width: 60%">
+     </div>
+    </a>
+    <footer>
+     <div class="skeleton" style="width: 40%">
+     </div>
+    </footer>
+   </article>
+  </div>
+ </section>
+</main>
+
+---

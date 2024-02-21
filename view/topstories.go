@@ -1,28 +1,26 @@
 package view
 
-import "github.com/sunesimonsen/htmx-hackernews/templates"
+import (
+	"fmt"
+
+	"github.com/sunesimonsen/htmx-hackernews/templates"
+)
 
 type TopStoriesRepo interface {
 	GetTopStoryIds() ([]int, error)
 }
 
-type TopStoriesView struct {
-	Templates templates.Renderer
-	Repo      TopStoriesRepo
+type TopStories struct {
+	Repo TopStoriesRepo
 }
 
-type TopStoriesViewData struct {
-	Ids []int
-}
-
-func (v TopStoriesView) Data(params Params, headers Headers) (ViewData[TopStoriesViewData], error) {
-	result := ViewData[TopStoriesViewData]{
-		Template: "topstories.gohtml",
-	}
+func (v TopStories) Render(params Params, headers Headers) (Result, error) {
+	var result Result
 
 	ids, err := v.Repo.GetTopStoryIds()
 
-	result.Data.Ids = ids
+	result.Component = templates.TopStories(ids)
+	result.HashKey = fmt.Sprintln(ids)
 
 	return result, err
 }

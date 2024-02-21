@@ -7,25 +7,13 @@ import (
 )
 
 func (s *server) setupRoutes() {
-	s.router.Handle("GET /{$}",
-		view.WithView(s.templates, "main", view.IndexView{}),
-	)
-	s.router.Handle("GET /story/{id}",
-		view.WithView(s.templates, "main", view.StoryWithCommentsView{Repo: s.repo}),
-	)
-	s.router.Handle("GET /comment/{id}",
-		view.WithView(s.templates, "main", view.CommentWithAnswersView{Repo: s.repo}),
-	)
+	s.router.RegisterView("GET /{$}", view.WithMainLayout(view.Index{}))
+	s.router.RegisterView("GET /story/{id}", view.WithMainLayout(view.Story{Repo: s.repo, IncludeComments: true}))
+	s.router.RegisterView("GET /comment/{id}", view.WithMainLayout(view.Comment{Repo: s.repo, IncludeAnswers: true}))
 
-	s.router.Handle("GET /parts/topstories",
-		view.WithView(s.templates, "part", view.TopStoriesView{Repo: s.repo}),
-	)
-	s.router.Handle("GET /parts/story/{id}",
-		view.WithView(s.templates, "part", view.StoryView{Repo: s.repo}),
-	)
-	s.router.Handle("GET /parts/comment/{id}",
-		view.WithView(s.templates, "part", view.CommentView{Repo: s.repo}),
-	)
+	s.router.RegisterView("GET /parts/topstories", view.TopStories{Repo: s.repo})
+	s.router.RegisterView("GET /parts/story/{id}", view.Story{Repo: s.repo})
+	s.router.RegisterView("GET /parts/comment/{id}", view.Comment{Repo: s.repo})
 
 	s.router.Handle("GET /assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("./server/assets"))))
 }

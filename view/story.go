@@ -4,20 +4,20 @@ import (
 	"fmt"
 
 	"github.com/sunesimonsen/htmx-hackernews/model"
+	"github.com/sunesimonsen/htmx-hackernews/templates"
 )
 
 type StoryRepo interface {
 	GetStory(id string) (model.Story, error)
 }
 
-type StoryView struct {
-	Repo StoryRepo
+type Story struct {
+	Repo            StoryRepo
+	IncludeComments bool
 }
 
-func (v StoryView) Data(params Params, headers Headers) (ViewData[model.Story], error) {
-	result := ViewData[model.Story]{
-		Template: "story.gohtml",
-	}
+func (v Story) Render(params Params, headers Headers) (Result, error) {
+	var result Result
 
 	story, err := v.Repo.GetStory(params.Get("id"))
 
@@ -25,25 +25,13 @@ func (v StoryView) Data(params Params, headers Headers) (ViewData[model.Story], 
 		return result, err
 	}
 
-	result.Data = story
+	result.Component = templates.Story(story, v.IncludeComments)
 
 	result.HashKey = fmt.Sprintf(
 		"descendants:%d,score:%d",
 		story.Descendants,
 		story.Score,
 	)
-
-	return result, err
-}
-
-type StoryWithCommentsView struct {
-	Repo StoryRepo
-}
-
-func (v StoryWithCommentsView) Data(params Params, headers Headers) (ViewData[model.Story], error) {
-	result, err := StoryView{Repo: v.Repo}.Data(params, headers)
-
-	result.Template = "story-with-comments.gohtml"
 
 	return result, err
 }

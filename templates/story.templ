@@ -1,0 +1,36 @@
+package templates
+
+import (
+    "strconv"
+    "fmt"
+
+    "github.com/sunesimonsen/htmx-hackernews/model"
+)
+
+templ Story(story model.Story, includeComments bool) {
+  <article class="story">
+      <a href={templ.SafeURL(story.Url)} target="_blank" title={story.Title} class="title">{story.Title}</a>
+      <footer>
+          <span class="by-line">{strconv.Itoa(story.Score)} points by {story.By}</span>
+          <span data-timestamp>{strconv.Itoa(story.Time)}</span>
+          if !includeComments && story.Descendants > 0 {
+            <a href={templ.SafeURL(fmt.Sprintf("/story/%d", story.Id))}>
+                {strconv.Itoa(story.Descendants)} comments
+            </a>
+          }
+      </footer>
+      if includeComments {
+        <section class="comments">
+          for _, id := range story.Kids {
+            <article class="comment" hx-get={fmt.Sprintf("/parts/comment/%d", id)} hx-trigger="revealed" hx-swap="outerHTML">
+              <p><div class="skeleton" style="width: 60%"></div></p>
+              <p><div class="skeleton" style="width: 70%"></div></p>
+              <p><div class="skeleton" style="width: 50%"></div></p>
+              <footer><div class="skeleton" style="width: 40%"></div></footer>
+            </article>
+          }
+        </section>
+      }
+  </article>
+}
+

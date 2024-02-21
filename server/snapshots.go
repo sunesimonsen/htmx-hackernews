@@ -1,10 +1,12 @@
 package server
 
 import (
+	"bytes"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 
+	"github.com/a-h/htmlformat"
 	"github.com/alecthomas/assert/v2"
 	"github.com/gkampitakis/go-snaps/snaps"
 	"github.com/sunesimonsen/htmx-hackernews/mock"
@@ -24,10 +26,16 @@ func snapshotResponse(t *testing.T, path string, upstreamPath string, responseOb
 
 	server.ServeHTTP(response, request)
 
+	buffer := bytes.NewBuffer(make([]byte, 0, 1024))
+	err = htmlformat.Fragment(buffer, response.Body)
+	if err != nil {
+		panic(err)
+	}
+
 	result := response.Result()
 	snaps.MatchSnapshot(t,
 		result.Header,
 		result.StatusCode,
-		response.Body.String(),
+		buffer.String(),
 	)
 }
