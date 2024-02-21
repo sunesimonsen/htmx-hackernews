@@ -1,4 +1,18 @@
-deploy:
+default: test
+
+templates/*_templ.go: templates/*.templ
+	templ generate templates/*.templ
+
+templ: templates/*_templ.go
+
+tmp/main: **/*.go templates/*_templ.go
+	go build -o tmp/main
+
+build: tmp/main
+
+generate: templ
+
+deploy: generate
 	gcloud app deploy
 
 browse:
@@ -10,5 +24,8 @@ test:
 test-update:
 	UPDATE_SNAPS=true go test ./...
 
-cover:
+dev:
+	air
+
+cover: generate
 	go test ./... -cover
