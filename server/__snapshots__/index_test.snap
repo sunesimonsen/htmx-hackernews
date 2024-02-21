@@ -3,7 +3,7 @@
 http.Header{
     "Cache-Control": {"max-age=0"},
     "Content-Type":  {"text/html"},
-    "Etag":          {"W/\"20-c2df9b932637fe9d32a0f16da1c11873398f873d\""},
+    "Etag":          {"W/\"20-9104c9716e266b8757161eaaeeeb3efa4c74525d\""},
 }
 int(200)
 <title>
@@ -29,8 +29,8 @@ int(200)
   </a>
  </header>
  <section class="content">
-  <div class="stories" hx-get="/parts/topstories" hx-trigger="load">
-   <article class="htmx-indicator story placeholder">
+  <div class="stories">
+   <article class="story" hx-get="/parts/story/42" hx-trigger="revealed" hx-swap="outerHTML">
     <a class="title">
      <div class="skeleton" style="width: 60%">
      </div>
@@ -40,7 +40,7 @@ int(200)
      </div>
     </footer>
    </article>
-   <article class="htmx-indicator story placeholder">
+   <article class="story" hx-get="/parts/story/3545" hx-trigger="revealed" hx-swap="outerHTML">
     <a class="title">
      <div class="skeleton" style="width: 60%">
      </div>
@@ -50,7 +50,7 @@ int(200)
      </div>
     </footer>
    </article>
-   <article class="htmx-indicator story placeholder">
+   <article class="story" hx-get="/parts/story/345" hx-trigger="revealed" hx-swap="outerHTML">
     <a class="title">
      <div class="skeleton" style="width: 60%">
      </div>
@@ -60,17 +60,7 @@ int(200)
      </div>
     </footer>
    </article>
-   <article class="htmx-indicator story placeholder">
-    <a class="title">
-     <div class="skeleton" style="width: 60%">
-     </div>
-    </a>
-    <footer>
-     <div class="skeleton" style="width: 40%">
-     </div>
-    </footer>
-   </article>
-   <article class="htmx-indicator story placeholder">
+   <article class="story" hx-get="/parts/story/1" hx-trigger="revealed" hx-swap="outerHTML">
     <a class="title">
      <div class="skeleton" style="width: 60%">
      </div>

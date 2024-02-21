@@ -1,12 +1,26 @@
 package view
 
-import "github.com/sunesimonsen/htmx-hackernews/templates"
+import (
+	"fmt"
 
-type Index struct{}
+	"github.com/sunesimonsen/htmx-hackernews/templates"
+)
+
+type TopStoriesRepo interface {
+	GetTopStoryIds() ([]int, error)
+}
+
+type Index struct {
+	Repo TopStoriesRepo
+}
 
 func (v Index) Render(params Params, headers Headers) (Result, error) {
-	return Result{
-		Component: templates.Index(),
-		HashKey:   "Index",
-	}, nil
+	var result Result
+
+	ids, err := v.Repo.GetTopStoryIds()
+
+	result.Component = templates.Index(ids)
+	result.HashKey = fmt.Sprintln(ids)
+
+	return result, err
 }

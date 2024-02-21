@@ -1,18 +1,16 @@
 package templates
 
-templ storyPlaceholder() {
-  <article class="htmx-indicator story placeholder">
-    <a class="title"><div class="skeleton" style="width: 60%"></div></a>
-    <footer><div class="skeleton" style="width: 40%"></div></footer>
-  </article>
-}
+import (
+    "fmt"
+)
 
-templ Index() {
-  <div class="stories" hx-get="/parts/topstories" hx-trigger="load">
-    @storyPlaceholder()
-    @storyPlaceholder()
-    @storyPlaceholder()
-    @storyPlaceholder()
-    @storyPlaceholder()
+templ Index(ids []int) {
+  <div class="stories">
+    for _, id := range ids {
+      <article class="story" hx-get={fmt.Sprintf("/parts/story/%d", id)} hx-trigger="revealed" hx-swap="outerHTML">
+        <a class="title"><div class="skeleton" style="width: 60%"></div></a>
+        <footer><div class="skeleton" style="width: 40%"></div></footer>
+      </article>
+    }
   </div>
 }
