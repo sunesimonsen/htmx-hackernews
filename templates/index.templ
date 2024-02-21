@@ -1,0 +1,18 @@
+package templates
+
+templ storyPlaceholder() {
+  <article class="htmx-indicator story placeholder">
+    <a class="title"><div class="skeleton" style="width: 60%"></div></a>
+    <footer><div class="skeleton" style="width: 40%"></div></footer>
+  </article>
+}
+
+templ Index() {
+  <div class="stories" hx-get="/parts/topstories" hx-trigger="load">
+    @storyPlaceholder()
+    @storyPlaceholder()
+    @storyPlaceholder()
+    @storyPlaceholder()
+    @storyPlaceholder()
+  </div>
+}

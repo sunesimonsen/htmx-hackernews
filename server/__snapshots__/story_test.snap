@@ -1,72 +1,148 @@
 
-[TestGetStory/with_a_succesful_response - 1]
+[TestStory/GET_/story/37173339_with_a_succesful_response - 1]
 http.Header{
     "Cache-Control": {"max-age=0"},
     "Content-Type":  {"text/html"},
-    "Etag":          {"W/\"20-f8f8bf3ad972b74867c77c69dcb2afed2e4a74e3\""},
+    "Etag":          {"W/\"20-e7c3b134de58e7bc8024edf8f94587594d815619\""},
 }
 int(200)
-
-<html lang="en">
-  <head>
-    <title>Hackernews</title>
-    <meta charset="UTF-8"/>
-    <meta name="description" content="Hackernews example app in htmx and Go" lang="en"/>
-    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
-    <script src="https://unpkg.com/htmx.org@1.9.4" integrity="sha384-zUfuhFKKZCbHTY6aRR46gxiqszMk5tcHjsVFxnUo8VMus4kHGVdIYVbOYYNlKmHV" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/ulid@2.3.0/dist/index.umd.js"></script>
-    <script src="/assets/scripts.js"></script>
-    <link rel="stylesheet" href="/assets/main.css">
-  </head>
-  <body>
-    <main>
-      
-<header class="topBar">
-  
-<a class="logo" href="/">
-    <img src="/assets/y18.gif" />
-    <span class="logo-caption">Hacker News</span>
-</a>
-
-</header>
-
-      <section class="content">
-        
-  <article class="story expanded">
-      <a href="https://www.sjoerdlangkemper.nl/2023/08/16/session-timeout/" rel="noreferrer" title="Short session expiration does not help security" class="title">Short session expiration does not help security</a>
-      <footer>
-          <span class="by-line">191 points by ColinWright</span>
-          <span data-timestamp>1692351932</span>
-      </footer>
-      <section class="comments">
-        
-        <article class="comment" hx-get="/parts/comment/37175324" hx-trigger="revealed" hx-swap="outerHTML">
-          <p><div class="skeleton" style="width: 60%"></div></p>
-          <p><div class="skeleton" style="width: 70%"></div></p>
-          <p><div class="skeleton" style="width: 50%"></div></p>
-          <footer><div class="skeleton" style="width: 40%"></div></footer>
-        </article>
-        
-        <article class="comment" hx-get="/parts/comment/37176779" hx-trigger="revealed" hx-swap="outerHTML">
-          <p><div class="skeleton" style="width: 60%"></div></p>
-          <p><div class="skeleton" style="width: 70%"></div></p>
-          <p><div class="skeleton" style="width: 50%"></div></p>
-          <footer><div class="skeleton" style="width: 40%"></div></footer>
-        </article>
-        
-        <article class="comment" hx-get="/parts/comment/37175611" hx-trigger="revealed" hx-swap="outerHTML">
-          <p><div class="skeleton" style="width: 60%"></div></p>
-          <p><div class="skeleton" style="width: 70%"></div></p>
-          <p><div class="skeleton" style="width: 50%"></div></p>
-          <footer><div class="skeleton" style="width: 40%"></div></footer>
-        </article>
-        
-      </section>
+<title>
+ Hackernews
+</title>
+<meta charset="UTF-8">
+<meta name="description" content="Hackernews example app in htmx and Go" lang="en">
+<link rel="stylesheet" href="/assets/main.css">
+<link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+<script src="https://unpkg.com/htmx.org@1.9.4" integrity="sha384-zUfuhFKKZCbHTY6aRR46gxiqszMk5tcHjsVFxnUo8VMus4kHGVdIYVbOYYNlKmHV" crossorigin="anonymous">
+</script>
+<script src="https://unpkg.com/ulid@2.3.0/dist/index.umd.js">
+</script>
+<script src="/assets/scripts.js">
+</script>
+<main>
+ <header class="topBar">
+  <a class="logo" href="/">
+   <img src="/assets/y18.gif">
+   <span class="logo-caption">
+    Hacker News
+   </span>
+  </a>
+ </header>
+ <section class="content">
+  <article class="story">
+   <a href="https://www.sjoerdlangkemper.nl/2023/08/16/session-timeout/" target="_blank" title="Short session expiration does not help security" class="title">
+    Short session expiration does not help security
+   </a>
+   <footer>
+    <span class="by-line">
+     191 points by ColinWright
+    </span>
+    <span data-timestamp="">
+     1692351932
+    </span>
+   </footer>
+   <section class="comments">
+    <article class="comment" hx-get="/parts/comment/37175324" hx-trigger="revealed" hx-swap="outerHTML">
+     <p>
+     </p>
+     <div class="skeleton" style="width: 60%">
+     </div>
+     <p>
+     </p>
+     <p>
+     </p>
+     <div class="skeleton" style="width: 70%">
+     </div>
+     <p>
+     </p>
+     <p>
+     </p>
+     <div class="skeleton" style="width: 50%">
+     </div>
+     <p>
+     </p>
+     <footer>
+      <div class="skeleton" style="width: 40%">
+      </div>
+     </footer>
+    </article>
+    <article class="comment" hx-get="/parts/comment/37176779" hx-trigger="revealed" hx-swap="outerHTML">
+     <p>
+     </p>
+     <div class="skeleton" style="width: 60%">
+     </div>
+     <p>
+     </p>
+     <p>
+     </p>
+     <div class="skeleton" style="width: 70%">
+     </div>
+     <p>
+     </p>
+     <p>
+     </p>
+     <div class="skeleton" style="width: 50%">
+     </div>
+     <p>
+     </p>
+     <footer>
+      <div class="skeleton" style="width: 40%">
+      </div>
+     </footer>
+    </article>
+    <article class="comment" hx-get="/parts/comment/37175611" hx-trigger="revealed" hx-swap="outerHTML">
+     <p>
+     </p>
+     <div class="skeleton" style="width: 60%">
+     </div>
+     <p>
+     </p>
+     <p>
+     </p>
+     <div class="skeleton" style="width: 70%">
+     </div>
+     <p>
+     </p>
+     <p>
+     </p>
+     <div class="skeleton" style="width: 50%">
+     </div>
+     <p>
+     </p>
+     <footer>
+      <div class="skeleton" style="width: 40%">
+      </div>
+     </footer>
+    </article>
+   </section>
   </article>
+ </section>
+</main>
 
-      </section>
-    </main>
-  </body>
-</html>
+---
+
+[TestStory/GET_/parts/story/37173339_with_a_succesful_response - 1]
+http.Header{
+    "Cache-Control": {"max-age=0"},
+    "Content-Type":  {"text/html"},
+    "Etag":          {"W/\"20-e7c3b134de58e7bc8024edf8f94587594d815619\""},
+}
+int(200)
+<article class="story">
+ <a href="https://www.sjoerdlangkemper.nl/2023/08/16/session-timeout/" target="_blank" title="Short session expiration does not help security" class="title">
+  Short session expiration does not help security
+ </a>
+ <footer>
+  <span class="by-line">
+   191 points by ColinWright
+  </span>
+  <span data-timestamp="">
+   1692351932
+  </span>
+  <a href="/story/37173339">
+   112 comments
+  </a>
+ </footer>
+</article>
 
 ---

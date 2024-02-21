@@ -1,21 +1,26 @@
-package view
+package server
 
 import (
 	"errors"
-	"fmt"
 	"net/http"
 
 	"github.com/hhsnopek/etag"
 	"github.com/sunesimonsen/htmx-hackernews/repo"
-	"github.com/sunesimonsen/htmx-hackernews/templates"
+	"github.com/sunesimonsen/htmx-hackernews/view"
 )
 
-type Headers interface {
-	Get(name string) string
+type Router struct {
+	mux *http.ServeMux
 }
 
-type Params interface {
-	Get(name string) string
+func (router Router) Handle(pattern string, handler http.Handler) {
+	router.mux.Handle(pattern, handler)
+}
+
+func NewRouter() Router {
+	return Router{
+		mux: http.NewServeMux(),
+	}
 }
 
 type paramsWrapper struct {
@@ -26,19 +31,9 @@ func (ps paramsWrapper) Get(name string) string {
 	return ps.req.PathValue(name)
 }
 
-type ViewData[T any] struct {
-	Template string
-	HashKey  string
-	Data     T
-}
-
-type View[T any] interface {
-	Data(params Params, headers Headers) (ViewData[T], error)
-}
-
-func WithView[T any](renderer templates.Renderer, layout string, view View[T]) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		data, err := view.Data(paramsWrapper{req: r}, r.Header)
+func (router Router) RegisterView(pattern string, view view.View) {
+	router.mux.HandleFunc(pattern, func(w http.ResponseWriter, r *http.Request) {
+		viewResult, err := view.Render(paramsWrapper{r}, r.Header)
 
 		httpError := &repo.HttpError{}
 		if errors.As(err, httpError) {
@@ -71,9 +66,8 @@ func WithView[T any](renderer templates.Renderer, layout string, view View[T]) h
 		w.Header().Set("Content-Type", "text/html")
 		w.Header().Set("Cache-Control", "max-age=0")
 
-		if data.HashKey != "" {
-			hashKey := fmt.Sprintf("layout:%s,%s", layout, data.HashKey)
-			e := etag.Generate([]byte(hashKey), true)
+		if viewResult.HashKey != "" {
+			e := etag.Generate([]byte(viewResult.HashKey), true)
 
 			ifNoneMatch := r.Header.Get("If-None-Match")
 			if ifNoneMatch == e {
@@ -84,7 +78,10 @@ func WithView[T any](renderer templates.Renderer, layout string, view View[T]) h
 			w.Header().Set("ETag", e)
 		}
 
-		// render template
-		renderer.Render(w, data.Template, layout, data.Data)
-	}
+		viewResult.Component.Render(r.Context(), w)
+	})
+}
+
+func (router Router) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	router.mux.ServeHTTP(w, r)
 }
