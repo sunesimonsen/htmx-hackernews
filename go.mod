@@ -11,6 +11,7 @@ require (
 	github.com/alecthomas/assert/v2 v2.3.0
 	github.com/gkampitakis/go-snaps v0.4.8
 	github.com/hhsnopek/etag v0.0.0-20171206181245-aea95f647346
+	github.com/kennygrant/sanitize v1.2.4
 )
 
 require golang.org/x/net v0.17.0 // indirect

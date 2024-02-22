@@ -1,5 +1,7 @@
 package model
 
+import "github.com/kennygrant/sanitize"
+
 type Comment struct {
 	Id      int    `json:"id"`
 	By      string `json:"by"`
@@ -8,4 +10,17 @@ type Comment struct {
 	Time    int    `json:"time"`
 	Kids    []int  `json:"kids"`
 	Answers int
+}
+
+func (c Comment) Html() string {
+	html, err := sanitize.HTMLAllowing(
+		c.Text,
+		[]string{"p", "a", "strong", "em"},
+	)
+
+	if err != nil {
+		sanitize.HTML(c.Text)
+	}
+
+	return html
 }

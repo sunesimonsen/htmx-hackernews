@@ -9,7 +9,7 @@ import (
 
 templ Comment(comment model.Comment, includeAnswers bool) {
   <article class="comment expanded">
-      <div class="comment-body">{comment.Text}</div>
+      <div class="comment-body">@templ.Raw(comment.Html())</div>
       <footer>
           <span>{comment.By}</span>
           <span data-timestamp>{strconv.Itoa(comment.Time)}</span>
