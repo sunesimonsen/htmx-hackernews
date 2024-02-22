@@ -38,32 +38,43 @@ func (rw *responseWriter) WriteHeader(code int) {
 func Logging(logger *slog.Logger) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		fn := func(w http.ResponseWriter, r *http.Request) {
+			logger = logger.With(
+				"method", r.Method,
+				"path", r.URL.EscapedPath(),
+				"clientId", r.Header.Get("X-Client-Id"),
+				"requestId", r.Header.Get("X-Request-Id"),
+			)
+
+			start := time.Now()
+
 			defer func() {
 				if recovered := recover(); recovered != nil {
-
 					err, ok := recovered.(error)
 
 					w.WriteHeader(http.StatusInternalServerError)
+
 					if ok {
-						logger.Error(err.Error())
+						logger.Error(
+							err.Error(),
+							"duration", time.Since(start),
+						)
+
 						fmt.Println(debug.Stack())
 					} else {
-						logger.Error("Unknown error")
+						logger.Error(
+							"Unknown error",
+							"duration", time.Since(start),
+						)
 					}
 				}
 			}()
 
-			start := time.Now()
 			wrapped := wrapResponseWriter(w)
 			next.ServeHTTP(wrapped, r)
 			logger.Info(
 				"request",
 				"status", wrapped.status,
-				"method", r.Method,
-				"path", r.URL.EscapedPath(),
 				"duration", time.Since(start),
-				"clientId", r.Header.Get("X-Client-Id"),
-				"requestId", r.Header.Get("X-Request-Id"),
 			)
 		}
 
