@@ -13,9 +13,9 @@ templ Comment(comment model.Comment, includeAnswers bool) {
       <footer>
           <span>{comment.By}</span>
           <span data-timestamp>{strconv.Itoa(comment.Time)}</span>
-          if !includeAnswers && comment.Answers > 0 {
+          if !includeAnswers && comment.Answers() > 0 {
             <a href={templ.SafeURL(fmt.Sprintf("/comment/%d", comment.Id))}>
-              {strconv.Itoa(comment.Answers)} answers
+              {strconv.Itoa(comment.Answers())} answers
             </a>
           }
       </footer>

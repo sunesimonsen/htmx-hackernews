@@ -18,7 +18,5 @@ func (host Host) GetComment(id string) (model.Comment, error) {
 		return comment, fmt.Errorf("%w: comment %s", NotFoundError, id)
 	}
 
-	comment.Answers = len(comment.Kids)
-
 	return comment, nil
 }

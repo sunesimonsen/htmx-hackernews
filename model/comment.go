@@ -3,13 +3,12 @@ package model
 import "github.com/kennygrant/sanitize"
 
 type Comment struct {
-	Id      int    `json:"id"`
-	By      string `json:"by"`
-	Parent  int    `json:"parent"`
-	Text    string `json:"text"`
-	Time    int    `json:"time"`
-	Kids    []int  `json:"kids"`
-	Answers int
+	Id     int    `json:"id"`
+	By     string `json:"by"`
+	Parent int    `json:"parent"`
+	Text   string `json:"text"`
+	Time   int    `json:"time"`
+	Kids   []int  `json:"kids"`
 }
 
 func (c Comment) Html() string {
@@ -23,4 +22,8 @@ func (c Comment) Html() string {
 	}
 
 	return html
+}
+
+func (c Comment) Answers() int {
+	return len(c.Kids)
 }

@@ -27,7 +27,7 @@ func (v Comment) Render(params Params, headers Headers) (Result, error) {
 
 	result.Component = templates.Comment(comment, v.IncludeAnswers)
 
-	result.HashKey = fmt.Sprintf("answers:%d", comment.Answers)
+	result.HashKey = fmt.Sprintf("answers:%d", comment.Answers())
 
 	return result, err
 }
