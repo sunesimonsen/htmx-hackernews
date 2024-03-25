@@ -15,9 +15,11 @@ type server struct {
 }
 
 func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	loggingMiddleware := middleware.Logging(slog.Default())
+	stack := middleware.CreateStack(
+		middleware.Logging(slog.Default()),
+	)
 
-	handler := loggingMiddleware(s.router)
+	handler := stack(s.router)
 
 	handler.ServeHTTP(w, r)
 }
