@@ -17,6 +17,10 @@ func (router Router) Handle(pattern string, handler http.Handler) {
 	router.mux.Handle(pattern, handler)
 }
 
+func (router Router) HandleFunc(pattern string, handler http.HandlerFunc) {
+	router.mux.HandleFunc(pattern, handler)
+}
+
 func NewRouter() Router {
 	return Router{
 		mux: http.NewServeMux(),

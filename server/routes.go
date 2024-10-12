@@ -15,4 +15,8 @@ func (s *server) setupRoutes() {
 	s.router.RegisterView("GET /parts/comment/{id}", view.Comment{Repo: s.repo})
 
 	s.router.Handle("GET /assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("./server/assets"))))
+
+	s.router.HandleFunc("GET /up", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(200)
+	})
 }
