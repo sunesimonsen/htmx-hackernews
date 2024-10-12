@@ -34,4 +34,4 @@ cover: generate
 	go test ./... -cover
 
 clean:
-	rm -rf templates/*_templ.go
+	rm -rf tmp templates/*_templ.go
