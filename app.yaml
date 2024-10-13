@@ -1,9 +1,0 @@
-runtime: go123
-
-handlers:
-  - url: /assets
-    static_dir: server/assets
-  - url: /.*
-    secure: always
-    redirect_http_response_code: 301
-    script: auto

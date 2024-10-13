@@ -13,10 +13,10 @@ build: tmp/main
 generate: templ
 
 deploy: generate
-	gcloud app deploy
+	git push dokku main:master
 
 browse:
-	gcloud app browse
+	open "https://news.sune.one/"
 
 run: generate
 	go run .
