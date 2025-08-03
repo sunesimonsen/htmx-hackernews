@@ -3,7 +3,7 @@ FROM golang:1.23-alpine AS golang
 WORKDIR /app
 COPY . .
 
-RUN go install github.com/a-h/templ/cmd/templ@latest
+RUN go install github.com/a-h/templ/cmd/templ@v0.2.793
 RUN go mod download
 RUN go mod verify
 
