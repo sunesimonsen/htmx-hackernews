@@ -37,7 +37,7 @@ header {
   overflow: hidden;
 }
 
-.story > .title {
+.story>.title {
   display: block;
   font-weight: normal;
   margin-top: 0;
@@ -56,7 +56,7 @@ header {
   white-space: inherit;
 }
 
-.comments > .comment {
+.comments>.comment {
   border-top: thin solid #ccc;
   margin-top: 1em;
   padding-top: 1em;
@@ -69,12 +69,12 @@ header {
   border-radius: 0.2em;
 }
 
-.comment > footer {
+.comment>footer {
   margin-top: 0.5em;
 }
 
-.story > footer,
-.comment > footer {
+.story>footer,
+.comment>footer {
   display: flex;
   flex-wrap: wrap;
   gap: 1.3em;
@@ -105,11 +105,11 @@ header {
   background: rgb(195 78 0);
 }
 
-.logo > img {
+.logo>img {
   border: thin solid white;
 }
 
-.logo > .logo-caption {
+.logo>.logo-caption {
   margin: 0 0.5em;
 }
 
@@ -119,7 +119,7 @@ header {
   }
 }
 
-.reload.spin-animation > svg {
+.reload.spin-animation>svg {
   animation: spin-animation 1s linear 1;
 }
 
@@ -135,7 +135,7 @@ header {
   background-color: rgba(47, 57, 65, 0.1);
 }
 
-@media only screen and (width <= 1000px) {
+@media only screen and (width <=600px) {
   .content {
     width: 95vw;
     max-width: inherit;
@@ -154,7 +154,7 @@ header {
     padding: 0.3em 0.8em;
   }
 
-  .logo > img {
+  .logo>img {
     height: 1em;
     width: 1em;
   }
